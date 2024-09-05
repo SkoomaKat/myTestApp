@@ -3,9 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@maps/*": ["assets/maps/*"],
+      "@nodeData/*": ["assets/nodeData/*"]
     }
   },
   "include": [

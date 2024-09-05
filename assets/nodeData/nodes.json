@@ -1,0 +1,86 @@
+{
+  "cave": {
+    "text": "You find yourself at the entrance of a dark cave. Do you want to enter?",
+    "mapId": "caveEntranceMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave.enter",
+        "prompt": "Enter the cave"
+      },
+      {
+        "nodeId": "forest",
+        "prompt": "Walk away"
+      }
+    ]
+  },
+  "cave.enter": {
+    "text": "You step into the cave. The air is cold and damp. You see two paths ahead.",
+    "mapId": "caveInteriorMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave.leftPath",
+        "prompt": "Take the left path"
+      },
+      {
+        "nodeId": "cave.rightPath",
+        "prompt": "Take the right path"
+      }
+    ]
+  },
+  "cave.leftPath": {
+    "text": "The left path leads you deeper into the cave until you find a dead end. There's nothing here but a strange marking on the wall.",
+    "mapId": "caveDeadEndMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave.enter",
+        "prompt": "Go back"
+      },
+      {
+        "nodeId": "forest",
+        "prompt": "Leave the cave and return to the forest"
+      }
+    ]
+  },
+  "cave.rightPath": {
+    "text": "The right path twists and turns until you find yourself back at the cave entrance.",
+    "mapId": "caveEntranceMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave.enter",
+        "prompt": "Enter the cave again"
+      },
+      {
+        "nodeId": "forest",
+        "prompt": "Leave the cave"
+      }
+    ]
+  },
+  "forest": {
+    "text": "You walk away from the cave and find yourself in a dark forest. The trees are tall, and the atmosphere is tense.",
+    "mapId": "forestMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave",
+        "prompt": "Return to the cave entrance"
+      },
+      {
+        "nodeId": "forest.deep",
+        "prompt": "Venture deeper into the forest"
+      }
+    ]
+  },
+  "forest.deep": {
+    "text": "As you venture deeper into the forest, you find yourself lost. The only way back seems to be the direction of the cave.",
+    "mapId": "deepForestMap",
+    "storyBranchProps": [
+      {
+        "nodeId": "cave",
+        "prompt": "Head back towards the cave"
+      },
+      {
+        "nodeId": "forest",
+        "prompt": "Try to retrace your steps"
+      }
+    ]
+  }
+}
