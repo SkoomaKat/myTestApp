@@ -10,11 +10,11 @@ export interface StoryNodeProps {
 
 export class StoryNode {
     readonly map: StoryMap | null;
-    readonly text: string;
+    private _text: string;
     readonly nodeBranches: StoryBranch[] = [];
 
     constructor(props: StoryNodeProps) {
-        this.text = props.text;
+        this._text = props.text;
         props.storyBranchProps.forEach( (storyBranchProp) => {
             this.nodeBranches.push(new StoryBranch(storyBranchProp))
         })
@@ -22,4 +22,10 @@ export class StoryNode {
         this.map = props.mapId === undefined ? null :
             new StoryMap({mapId: props.mapId});
     }
+
+    public set text(text : string) {
+        this._text = text;
+    }
+
+    public get text() { return this._text }
 }

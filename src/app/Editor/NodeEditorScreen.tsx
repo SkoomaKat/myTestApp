@@ -10,7 +10,19 @@ import {
 import { Text, View } from '@/src/components/Themed';
 import Svg, { Line } from 'react-native-svg';
 import {editorStyles} from "@/src/app/Editor/components/editorStyles";
-import {deleteBranch, deleteNode, updateNodeField, updateNodeId} from "@/src/app/Editor/components/editorUtil";
+import {
+    deleteBranch,
+    deleteNode,
+    getNodeHeight,
+    updateNodeField,
+    updateNodeId
+} from "@/src/app/Editor/components/editorUtil";
+import {
+    branchContainerHeight,
+    branchContainerWidth,
+    nodeContainerHeight
+} from "@/src/app/Editor/components/constants";
+import TextOverlay from "@/src/app/Editor/components/TextOverlay";
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,11 +36,6 @@ export interface Node {
     storyText: string;
     storyImageId?: string;
     nodeBranches: StoryBranch[];
-    x: number;
-    y: number;
-}
-
-export interface BranchPosition {
     x: number;
     y: number;
 }
@@ -56,6 +63,10 @@ export default function NodeEditorScreen() {
     const [editingNode, setEditingNode] = useState<string | null>(null);
     const [fieldBeingEdited, setFieldBeingEdited] = useState<{ nodeId: string, branchIndex?: number, field: string } | null>(null);
     const [temporaryNodeIds, setTemporaryNodeIds] = useState<{ [key: string]: string }>({}); // Temporary state for nodeId
+    const [nodeBeingEdited, setNodeBeingEdited] = useState<string | null>(null);
+    const [currentNodeStoryText, setCurrentNodeStoryText] = useState<string>('');
+    const [showTextOverlay, setShowTextOverlay] = useState<boolean>(false);
+
 
     const panResponder = (nodeId: string) =>
         PanResponder.create({
@@ -70,6 +81,25 @@ export default function NodeEditorScreen() {
                 );
             },
         });
+
+    const handleEditStoryText = (node: Node) => {
+        setNodeBeingEdited(node.id);
+        setCurrentNodeStoryText(node.storyText);
+        setShowTextOverlay(true);  // Show the text overlay
+    };
+
+    const handleCancelEdit = (defaultText: string) => {
+        setShowTextOverlay(false);
+    };
+
+    const handleSubmitEdit = (newText: string) => {
+        setNodes((prevNodes) =>
+            prevNodes.map((node) =>
+                node.id === nodeBeingEdited ? { ...node, storyText: newText } : node
+            )
+        );
+        setShowTextOverlay(false);
+    };
 
     const handleDoubleClick = (nodeId: string, field: string, branchIndex?: number) => {
         setEditingNode(nodeId);
@@ -104,37 +134,11 @@ export default function NodeEditorScreen() {
             maximumZoomScale={10}
             scrollToOverflowEnabled={true}
         >
-
-            <Svg height={height} width={width} style={editorStyles.svg}>
-                {nodes.map((node) =>
-                    node.nodeBranches.map((branch, index) => {
-                        const toNode = findNodeById(branch.linkedNodeId);
-                        if (!toNode) return null;
-
-                        // Calculate dynamic positions for lines based on node's and branch's positions
-                        const branchX = node.x + 275; // Adjust based on the center of the branch relative to node
-                        const branchY = node.y + (index + 1) * 110 + 105; // Adjust spacing based on branch index
-
-                        return (
-                            <Line
-                                key={`${node.id}-${index}`}
-                                x1={branchX}
-                                y1={branchY}
-                                x2={toNode.x + 50} // Center of the target node
-                                y2={toNode.y + 25} // Center of the target node
-                                stroke="black"
-                                strokeWidth="2"
-                            />
-                        );
-                    })
-                )}
-            </Svg>
-
             {nodes.map((node) => (
                 <View
                     key={node.id}
                     {...panResponder(node.id).panHandlers}
-                    style={[editorStyles.node, { left: node.x, top: node.y }]}
+                    style={[editorStyles.node, { left: node.x, top: node.y, height: getNodeHeight(node) }]}
                 >
                     <TouchableOpacity
                         onPress={() => setNodes((prevNodes) => deleteNode(prevNodes, node.id))}
@@ -161,21 +165,19 @@ export default function NodeEditorScreen() {
                         fieldLabel="ImageId"
                     />
 
-                    <EditableField
-                        value={node.storyText}
-                        onEdit={() => handleDoubleClick(node.id, 'storyText')}
-                        onChangeText={(text) => setNodes((prevNodes) => updateNodeField(prevNodes, node.id, text, 'storyText'))}
-                        isEditing={editingNode === node.id && fieldBeingEdited?.field === 'storyText'}
-                        onBlur={() => handleBlur(node.id, 'storyText')}
-                        fieldLabel="StoryText"
-                    />
+
+
+                    {/* Story Text Field with Text Overlay */}
+                    <TouchableOpacity onPress={() => handleEditStoryText(node)}>
+                        <Text style={editorStyles.storyText}>{`StoryText: \n${node.storyText}`}</Text>
+                    </TouchableOpacity>
 
                     {node.nodeBranches.map((branch, index) => (
                         <View
                             key={index}
                             style={[
                                 editorStyles.branchContainer,
-                                { top: (index + 1) * 110 + 50 },
+                                { top: (index * branchContainerHeight) + nodeContainerHeight },
                             ]}
                         >
                             <TouchableOpacity
@@ -212,6 +214,40 @@ export default function NodeEditorScreen() {
                     ))}
                 </View>
             ))}
+
+            <Svg height={height} width={width} style={editorStyles.svg}>
+                {nodes.map((node) =>
+                    node.nodeBranches.map((branch, index) => {
+                        const toNode = findNodeById(branch.linkedNodeId);
+                        if (!toNode) return null;
+
+                        // Calculate dynamic positions for lines based on node's and branch's positions
+                        const branchX = node.x + branchContainerWidth + 10; // Adjust based on the center of the branch relative to node
+                        const branchY = node.y + ((index + 1) * branchContainerHeight) + nodeContainerHeight - branchContainerHeight/2; // Adjust spacing based on branch index
+
+                        return (
+                            <Line
+                                key={`${node.id}-${index}`}
+                                x1={branchX}
+                                y1={branchY}
+                                x2={toNode.x} // Center of the target node
+                                y2={toNode.y + (nodeContainerHeight/2)} // Center of the target node
+                                stroke="black"
+                                strokeWidth="2"
+                            />
+                        );
+                    })
+                )}
+            </Svg>
+
+            {/* Text Overlay Modal for Editing Story Text */}
+            {showTextOverlay && (
+                <TextOverlay
+                    defaultText={currentNodeStoryText}
+                    onCancel={handleCancelEdit}
+                    onSubmit={handleSubmitEdit}
+                />
+            )}
         </ScrollView>
     );
 }
@@ -225,7 +261,7 @@ const initialNodes = [
             { linkedNodeId: 'forest', storyPrompt: 'Go to the forest' },
             { linkedNodeId: 'caveInterior', storyPrompt: 'Enter the cave' }
         ],
-        x: 100, y: 100,
+        x: 100, y: 100
     },
     {
         id: 'forest', storyText: 'You are in a dark forest.',
@@ -233,6 +269,6 @@ const initialNodes = [
         nodeBranches: [
             { linkedNodeId: 'cave', storyPrompt: 'Return to the cave' }
         ],
-        x: 300, y: 200,
+        x: 300, y: 200
     },
 ]

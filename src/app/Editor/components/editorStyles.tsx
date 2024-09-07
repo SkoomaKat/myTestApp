@@ -1,4 +1,9 @@
 import {StyleSheet} from "react-native";
+import {
+    branchContainerHeight,
+    branchContainerWidth,
+    nodeContainerHeight
+} from "@/src/app/Editor/components/constants";
 
 export const editorStyles = StyleSheet.create({
     container: {
@@ -17,18 +22,24 @@ export const editorStyles = StyleSheet.create({
         position: 'absolute',
         padding: 10,
         backgroundColor: '#ddd',
-        borderRadius: 5,
+        borderRadius: 14,
         minWidth: 300,
         maxWidth: 600,
+        minHeight: nodeContainerHeight,
         alignItems: 'flex-start',
+        borderStyle: "solid",
+        borderWidth: 1
     },
     branchContainer: {
-        left: "5%",
-        height: 100,
+        height: branchContainerHeight,
         position: 'absolute',
         flexDirection: 'column',
-        width: 275,
+        width: branchContainerWidth,
         alignItems: 'flex-start',
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderRadius: 12,
+        borderColor: "black",
     },
     deleteButton: {
         backgroundColor: 'red',

@@ -1,11 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '@/src/components/Themed';
-import { StoryNodeFactory } from '@/src/factory/StoryNodeFactory';
-import { StoryNodeTracker } from "@/src/StoryNodeTracker";
+import React, {useEffect, useRef, useState} from 'react';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Text} from '@/src/components/Themed';
+import {StoryNodeFactory} from '@/src/factory/StoryNodeFactory';
+import {StoryNodeTracker} from "@/src/StoryNodeTracker";
+import {StoryCommand, StoryCommandType} from "@/src/models/StoryCommand";
+import {CustomFieldType} from "@/src/models/CustomFields";
 
 const initialNode = StoryNodeFactory.getStoryNodeById('cave');
 const nodeTracker = new StoryNodeTracker(initialNode);
+
+StoryCommand.resolveCommand({
+    commandType: StoryCommandType.SET,
+    fieldType: CustomFieldType.STRING,
+    fieldName: "NAME",
+    fieldValue: "Andrew",
+})
 
 export default function StoryScreen() {
     const scrollViewRef = useRef<ScrollView>(null);
@@ -76,10 +85,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 10,
-        marginBottom: '30%',
         backgroundColor: 'transparent',
     },
     storyBoxContent: {
+        alignItems: "center",
         justifyContent: 'flex-end', // Push content to the bottom
         flexGrow: 1,
         backgroundColor: 'transparent',
@@ -87,12 +96,12 @@ const styles = StyleSheet.create({
     storyText: {
         color: 'white',
         fontSize: 18,
-        marginBottom: 5,
+        marginBottom: 20,
     },
     buttonContainer: {
         flexDirection: 'column',
         alignItems: 'center',
-        paddingBottom: '20%',
+        marginBottom: 100,
         paddingTop: '5%',
         overflow: 'hidden',
         backgroundColor: 'transparent',
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         borderRadius: 30,
         marginVertical: 5,
-        width: '100%',
+        minWidth: '80%',
         alignItems: 'center',
         overflow: 'hidden',
     },

@@ -14,7 +14,7 @@
     ]
   },
   "cave.enter": {
-    "text": "You step into the cave. The air is cold and damp. You see two paths ahead.",
+    "text": "You step into the cave. Your name is <GET STRING NAME>, The air is cold and damp. You see two paths ahead.",
     "mapId": "caveInteriorMap",
     "storyBranchProps": [
       {
