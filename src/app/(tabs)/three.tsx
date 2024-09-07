@@ -3,6 +3,7 @@ import {ScrollView, Image, StyleSheet, View, TouchableOpacity, Alert, Platform} 
 import {map} from "yaml/dist/schema/common/map";
 import {StoryBranch} from "@/src/models/StoryBranch";
 import {StoryNode} from "@/src/models/StoryNode";
+import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 
 const rootnode = new StoryNode({
   text: "Welcome to TextGame",
@@ -41,7 +42,7 @@ export default function TabThreeScreen() {
           scrollsToTop={false}
       >
         <Image
-            source={require('../../../assets/maps/testMap.png')} // Replace with your map image URL or require statement
+            source={rootnode.map?.image}
             style={styles.map}
         />
         {/* Example Waypoints */}

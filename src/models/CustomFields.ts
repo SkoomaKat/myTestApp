@@ -23,5 +23,6 @@ export class CustomFields {
 
 export enum CustomFieldType {
     NUMBER,
-    STRING
+    STRING,
+    IMAGE
 }

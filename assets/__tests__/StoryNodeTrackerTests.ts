@@ -43,22 +43,22 @@ describe('getStoryCommandRequest', () => {
 
     it('should throw an error for an invalid command type', () => {
         const commandString = 'INVALID NUMBER HEALTH 8';
-        expect(() => getStoryCommandRequest(commandString)).toThrowError('Invalid command type: INVALID');
+        expect(() => getStoryCommandRequest(commandString)).toThrow('Invalid command type: INVALID');
     });
 
     it('should throw an error for an invalid field type', () => {
         const commandString = 'SET INVALIDTYPE NAME ANDREW';
-        expect(() => getStoryCommandRequest(commandString)).toThrowError('Invalid field type: INVALIDTYPE');
+        expect(() => getStoryCommandRequest(commandString)).toThrow('Invalid field type: INVALIDTYPE');
     });
 
     it('should throw an error for missing field name', () => {
         const commandString = 'SET STRING';
-        expect(() => getStoryCommandRequest(commandString)).toThrowError('Invalid command string format.');
+        expect(() => getStoryCommandRequest(commandString)).toThrow('Invalid command string format.');
     });
 
     it('should throw an error for a number field with invalid value on ADD', () => {
         const commandString = 'ADD NUMBER HEALTH abc';
-        expect(() => getStoryCommandRequest(commandString)).toThrowError('Invalid number value for command: abc');
+        expect(() => getStoryCommandRequest(commandString)).toThrow('Invalid number value for command: abc');
     });
 
     it('should parse a valid ADD NUMBER command', () => {
@@ -87,7 +87,7 @@ describe('getStoryCommandRequest', () => {
 
     it('should throw an error if too few parts in the command string', () => {
         const commandString = 'SET NAME';
-        expect(() => getStoryCommandRequest(commandString)).toThrowError('Invalid command string format.');
+        expect(() => getStoryCommandRequest(commandString)).toThrow('Invalid command string format.');
     });
 
 });
@@ -182,6 +182,6 @@ describe('parseCommands', () => {
 
     it('should handle ADD NUMBER on undefined fields gracefully', () => {
         const storyText = 'Your new score is <ADD NUMBER SCORE2 10>';
-        expect(() => parseCommands(storyText)).toThrowError("WARN: SCORE2 UNDEFINED");
+        expect(() => parseCommands(storyText)).toThrow("WARN: SCORE2 UNDEFINED");
     });
 });

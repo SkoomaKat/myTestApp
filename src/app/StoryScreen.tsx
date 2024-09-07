@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View, Image} from 'react-native';
 import {Text} from '@/src/components/Themed';
 import {StoryNodeFactory} from '@/src/factory/StoryNodeFactory';
 import {StoryNodeTracker} from "@/src/StoryNodeTracker";
 import {StoryCommand, StoryCommandType} from "@/src/models/StoryCommand";
 import {CustomFieldType} from "@/src/models/CustomFields";
+import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 
 const initialNode = StoryNodeFactory.getStoryNodeById('cave');
 const nodeTracker = new StoryNodeTracker(initialNode);
@@ -51,9 +52,15 @@ export default function StoryScreen() {
                 contentContainerStyle={styles.storyBoxContent}
                 ref={scrollViewRef} // Attach the ref to the ScrollView
             >
-                {storyStack.map((text, index) => (
-                    <Text key={index} style={styles.storyText}>{text}</Text>
-                ))}
+                {storyStack.map((text, index) => {
+                    const imagePattern = /<IMAGE (\S+)>/;
+                    const match = text.match(imagePattern);
+
+                    if (match)
+                        return <Image key={index} style={styles.inlineImage} source={StoryImageFactory.getStoryImage(match[1])}/>
+                    else
+                        return <Text key={index} style={styles.storyText}>{text}</Text>
+                })}
             </ScrollView>
             <View style={styles.buttonContainer}>
                 {nodeTracker.currentNode && nodeTracker.currentNode.nodeBranches.length > 0 ? (
@@ -120,5 +127,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    inlineImage: {
+        resizeMode: "contain",
+        alignContent: 'center',
+        maxWidth: '90%',
+        maxHeight: "60%",
     },
 });

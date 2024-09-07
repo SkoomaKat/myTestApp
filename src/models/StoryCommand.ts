@@ -19,15 +19,14 @@ export class StoryCommand {
             throw new Error("Cannot modify CustomField without a value");
         }
 
+        // Handling the NUMBER field type
         if (commandRequest.fieldType === CustomFieldType.NUMBER) {
             if (commandRequest.commandType !== StoryCommandType.GET) {
-                // For SET, ADD, and SUBTRACT, ensure valid number input
                 const value = parseInt(commandRequest.fieldValue || "");
                 if (isNaN(value)) {
                     throw new Error(`Invalid number: ${commandRequest.fieldValue}`);
                 }
 
-                // Handle SET, ADD, and SUBTRACT commands for numbers
                 switch (commandRequest.commandType) {
                     case StoryCommandType.SET:
                         CustomFields.setNumber(commandRequest.fieldName, value);
@@ -50,10 +49,10 @@ export class StoryCommand {
                         break;
                 }
             } else {
-                // For GET command, return the number field
                 return CustomFields.getNumber(commandRequest.fieldName).toString();
             }
 
+            // Handling the STRING field type
         } else if (commandRequest.fieldType === CustomFieldType.STRING) {
             switch (commandRequest.commandType) {
                 case StoryCommandType.GET:
@@ -64,15 +63,21 @@ export class StoryCommand {
                     break;
 
                 case StoryCommandType.ADD:
-                    throw new Error(`Cannot perform ${commandRequest.commandType} operation on STRING type.`);
                 case StoryCommandType.SUBTRACT:
                     throw new Error(`Cannot perform ${commandRequest.commandType} operation on STRING type.`);
+            }
+
+            // Handling the IMAGE field type, only GET is allowed
+        } else if (commandRequest.fieldType === CustomFieldType.IMAGE) {
+            if (commandRequest.commandType === StoryCommandType.GET) {
+                return `<IMAGE ${commandRequest.fieldName}>`;
+            } else {
+                throw new Error("IMAGE field type can only be used with GET command.");
             }
         }
 
         return "";
     }
-
 }
 
 export enum StoryCommandType {

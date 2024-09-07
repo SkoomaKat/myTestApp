@@ -5,6 +5,11 @@ import {CustomFieldType} from "@/src/models/CustomFields";
 
 const MAX_NODES = 10;
 
+export interface ParseCommandResponse {
+    commandsParsed: number,
+    newText: string
+}
+
 export class StoryNodeTracker {
     private storyNodeStack: StoryNode[] = [];
 
@@ -17,7 +22,7 @@ export class StoryNodeTracker {
     }
 
     public addNode(storyNode: StoryNode) {
-        storyNode.text = parseCommands(storyNode.text)
+        storyNode.text = parseCommands(storyNode.text).newText
         this.storyNodeStack.push(storyNode);
 
         if (this.storyNodeStack.length > MAX_NODES) {
@@ -30,14 +35,17 @@ export class StoryNodeTracker {
     }
 }
 
-export function parseCommands(storyText: string) {
+export function parseCommands(storyText: string): ParseCommandResponse {
     const regex = /<([^>]+)>/g;
-    const replacedTexts: string[] = [];
+    let commandsParsed = 0;
 
     // Replace all occurrences and execute the commands.
-    return storyText.replace(regex, (match, command) => {
+    const newText = storyText.replace(regex, (match, command) => {
+        commandsParsed += 1;
         return StoryCommand.resolveCommand(getStoryCommandRequest(command));
     });
+
+    return { commandsParsed, newText }
 }
 
 export function getStoryCommandRequest(commandString: string): StoryCommandRequest {
@@ -77,6 +85,9 @@ export function getStoryCommandRequest(commandString: string): StoryCommandReque
             break;
         case "STRING":
             fieldType = CustomFieldType.STRING;
+            break;
+        case "IMAGE":
+            fieldType = CustomFieldType.IMAGE;
             break;
         default:
             throw new Error(`Invalid field type: ${fieldTypeString}`);

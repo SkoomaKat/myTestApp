@@ -28,7 +28,7 @@
     ]
   },
   "cave.leftPath": {
-    "text": "The left path leads you deeper into the cave until you find a dead end. There's nothing here but a strange marking on the wall.",
+    "text": "<GET IMAGE TEST_IMAGE>",
     "mapId": "caveDeadEndMap",
     "storyBranchProps": [
       {

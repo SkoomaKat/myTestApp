@@ -1,5 +1,5 @@
 import {Image, ImageResolvedAssetSource} from "react-native";
-import {StoryMapFactory} from "@/src/factory/StoryMapFactory";
+import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 
 export interface StoryMapProps {
     readonly mapId: string;
@@ -13,9 +13,9 @@ export class StoryMap {
         this.mapId = props.mapId;
     }
 
-    public get image() {
+    public get image(): ImageResolvedAssetSource {
         if (this.mapImage === undefined) {
-            this.mapImage = Image.resolveAssetSource(StoryMapFactory.getStoryMap(this.mapId));
+            this.mapImage = StoryImageFactory.getStoryMap(this.mapId);
         }
         return this.mapImage
     }
