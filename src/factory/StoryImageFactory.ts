@@ -6,6 +6,10 @@ const mapRegistry: { [key: string]: any } = {
 
 const imageRegistry: { [key: string]: any } = {
     TEST_IMAGE: require('@maps/testMap.png'),
+    BARREN_1: require('@images/BARREN_1.jpg'),
+    TAVERN_1: require('@images/TAVERN_1.jpg'),
+    ENDING_FROZEN: require('@images/ENDING_FROZEN.jpg'),
+    WINDOW_ROOM: require('@images/WINDOW_ROOM.jpg')
 };
 
 export class StoryImageFactory {

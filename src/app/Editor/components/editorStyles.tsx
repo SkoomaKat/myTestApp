@@ -2,15 +2,31 @@ import {StyleSheet} from "react-native";
 import {
     branchContainerHeight,
     branchContainerWidth,
-    nodeContainerHeight
+    nodeContainerHeight, nodeContainerWidth
 } from "@/src/app/Editor/components/constants";
 
 export const editorStyles = StyleSheet.create({
-    container: {
+    mainContainer: {
         flex: 1,
-        backgroundColor: 'gray',
-        width: '100%',
-        height: '100%',
+    },
+    navbar: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
+        backgroundColor: '#333',
+        alignItems: 'center',
+    },
+    navbarButton: {
+        padding: 10,
+        backgroundColor: '#555',
+        borderRadius: 5,
+    },
+    navbarButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    container: {
+        backgroundColor: 'gray'
     },
     svg: {
         position: 'absolute',
@@ -23,8 +39,7 @@ export const editorStyles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#ddd',
         borderRadius: 14,
-        minWidth: 300,
-        maxWidth: 600,
+        width: nodeContainerWidth,
         minHeight: nodeContainerHeight,
         alignItems: 'flex-start',
         borderStyle: "solid",
@@ -40,6 +55,7 @@ export const editorStyles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 12,
         borderColor: "black",
+        overflow: "scroll"
     },
     deleteButton: {
         backgroundColor: 'red',
@@ -53,6 +69,18 @@ export const editorStyles = StyleSheet.create({
     deleteButtonText: {
         color: 'white',
         fontSize: 12,
+    },
+    newBranchButton: {
+        backgroundColor: 'blue',
+        height: 15,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '2%',
+    },
+    newBranchButtonText: {
+        color: 'white',
+        fontSize: 14,
     },
     storyText: {
         color: 'black',

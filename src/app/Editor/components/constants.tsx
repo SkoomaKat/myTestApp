@@ -1,6 +1,8 @@
 
 
-export const nodeContainerHeight = 200;
+export const nodeContainerHeight = 400;
+export const nodeContainerWidth = 600;
 
-export const branchContainerHeight = 125;
-export const branchContainerWidth = 275;
+
+export const branchContainerHeight = 150;
+export const branchContainerWidth = 550;
