@@ -32,6 +32,7 @@ export default function StoryScreen() {
                 setStoryStack([...nodeTracker.nodeTexts]);
                 scrollToBottom();
                 setIsLoading(false);
+
             }
         };
 
