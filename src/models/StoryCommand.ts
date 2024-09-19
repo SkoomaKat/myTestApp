@@ -1,4 +1,4 @@
-import {CustomFields, CustomFieldType} from "@/src/models/CustomFields";
+import {CustomFields, CustomFieldType} from "@/src/persistance/CustomFields";
 
 
 export interface StoryCommandRequest {
@@ -10,7 +10,7 @@ export interface StoryCommandRequest {
 
 export class StoryCommand {
 
-    static resolveCommand(commandRequest: StoryCommandRequest): string {
+    static resolveCommand(commandRequest: StoryCommandRequest, wrapped: boolean = false): string {
         // For SET, ADD, and SUBTRACT, ensure a field value is provided
         if ((commandRequest.commandType === StoryCommandType.SET ||
                 commandRequest.commandType === StoryCommandType.ADD ||
@@ -56,7 +56,7 @@ export class StoryCommand {
         } else if (commandRequest.fieldType === CustomFieldType.STRING) {
             switch (commandRequest.commandType) {
                 case StoryCommandType.GET:
-                    return CustomFields.getString(commandRequest.fieldName);
+                    return CustomFields.getString(commandRequest.fieldName, wrapped) || "";
 
                 case StoryCommandType.SET:
                     CustomFields.setString(commandRequest.fieldName, commandRequest.fieldValue || "");

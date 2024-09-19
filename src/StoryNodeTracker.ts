@@ -1,7 +1,7 @@
 import {StoryNode} from "@/src/models/StoryNode";
-import * as Test from "node:test";
 import {StoryCommand, StoryCommandRequest, StoryCommandType} from "@/src/models/StoryCommand";
-import {CustomFieldType} from "@/src/models/CustomFields";
+import {CustomFields, CustomFieldType} from "@/src/persistance/CustomFields";
+import {CUR_NODE} from "@/src/app/storyScreenConstants";
 
 const MAX_NODES = 10;
 
@@ -13,16 +13,21 @@ export interface ParseCommandResponse {
 export class StoryNodeTracker {
     private storyNodeStack: StoryNode[] = [];
 
-    constructor(rootNode: StoryNode) {
-        this.addNode(rootNode);
+    constructor(rootNode: StoryNode, nodeId: string) {
+        this.addNode(rootNode, nodeId);
     }
 
     public get currentNode(): StoryNode {
         return this.storyNodeStack[this.storyNodeStack.length-1];
     }
 
-    public addNode(storyNode: StoryNode) {
-        storyNode.text = parseCommands(storyNode.text).newText
+    public addNode(storyNode: StoryNode, nodeId: string) {
+        const parseResult  = parseCommands(storyNode.text)
+
+        if (parseResult.commandsParsed > 0) {
+            storyNode.text = parseResult.newText;
+        }
+
         this.storyNodeStack.push(storyNode);
 
         if (this.storyNodeStack.length > MAX_NODES) {
@@ -33,16 +38,20 @@ export class StoryNodeTracker {
     public get nodeTexts(): string[] {
         return this.storyNodeStack.map(node => node.text);
     }
+
+    public setNodeTexts(nodeTexts: string[]) {
+        this.storyNodeStack = [...nodeTexts.map((text) => new StoryNode({nodeBranches: [], storyText: text})), this.storyNodeStack[this.storyNodeStack.length - 1]]
+    }
 }
 
-export function parseCommands(storyText: string): ParseCommandResponse {
+export function parseCommands(storyText: string, wrapped: boolean = false): ParseCommandResponse {
     const regex = /<([^>]+)>/g;
     let commandsParsed = 0;
 
     // Replace all occurrences and execute the commands.
     const newText = storyText.replace(regex, (match, command) => {
         commandsParsed += 1;
-        return StoryCommand.resolveCommand(getStoryCommandRequest(command));
+        return StoryCommand.resolveCommand(getStoryCommandRequest(command), wrapped);
     });
 
     return { commandsParsed, newText }

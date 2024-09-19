@@ -5,6 +5,7 @@
     "paths": {
       "@/*": ["./*"],
       "@maps/*": ["assets/maps/*"],
+      "@images/*": ["assets/images/*"],
       "@nodeData/*": ["assets/nodeData/*"]
     }
   },

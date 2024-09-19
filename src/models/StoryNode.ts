@@ -3,9 +3,9 @@ import {StoryBranch, StoryBranchProps} from "@/src/models/StoryBranch";
 
 
 export interface StoryNodeProps {
-    readonly mapId?: string;
-    readonly text: string;
-    readonly storyBranchProps: StoryBranchProps[];
+    readonly storyImageId?: string;
+    readonly storyText: string;
+    readonly nodeBranches: StoryBranchProps[];
 }
 
 export class StoryNode {
@@ -14,13 +14,13 @@ export class StoryNode {
     readonly nodeBranches: StoryBranch[] = [];
 
     constructor(props: StoryNodeProps) {
-        this._text = props.text;
-        props.storyBranchProps.forEach( (storyBranchProp) => {
+        this._text = props.storyText;
+        props.nodeBranches.forEach( (storyBranchProp) => {
             this.nodeBranches.push(new StoryBranch(storyBranchProp))
         })
 
-        this.map = props.mapId === undefined ? null :
-            new StoryMap({mapId: props.mapId});
+        this.map = props.storyImageId === undefined ? null :
+            new StoryMap({mapId: props.storyImageId});
     }
 
     public set text(text : string) {

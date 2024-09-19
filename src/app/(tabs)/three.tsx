@@ -6,12 +6,12 @@ import {StoryNode} from "@/src/models/StoryNode";
 import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 
 const rootnode = new StoryNode({
-  text: "Welcome to TextGame",
-  mapId: 'TEST_MAP',
-  storyBranchProps: [
-    { nodeId: "", prompt: "Prompt 1" },
-    { nodeId: "", prompt: "Prompt 2" },
-    { nodeId: "", prompt: "Prompt 3" },
+  storyText: "Welcome to TextGame",
+  storyImageId: 'TEST_MAP',
+  nodeBranches: [
+    { linkedNodeId: "", storyPrompt: "Prompt 1" },
+    { linkedNodeId: "", storyPrompt: "Prompt 2" },
+    { linkedNodeId: "", storyPrompt: "Prompt 3" },
   ]
 });
 

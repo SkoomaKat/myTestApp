@@ -34,6 +34,17 @@ export const deleteBranch = (prevNodes: Node[], nodeId: string, branchIndex: num
         })
 };
 
+export const addBranch = (prevNodes: Node[], nodeId: string) => {
+    return prevNodes.map((node) => {
+        if (node.id === nodeId) {
+            const updatedBranches = [
+                ...node.nodeBranches, {linkedNodeId: '', storyPrompt: '', condition: ""} ];
+            return { ...node, nodeBranches: updatedBranches };
+        }
+        return node;
+    })
+};
+
 export const deleteNode = (prevNodes: Node[], nodeId: string) => {
     return prevNodes.filter((node) => node.id !== nodeId)
 };

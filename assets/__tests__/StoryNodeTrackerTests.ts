@@ -1,6 +1,7 @@
 import {StoryCommandRequest, StoryCommandType} from "@/src/models/StoryCommand";
-import {CustomFields, CustomFieldType} from "@/src/models/CustomFields";
+import {CustomFields, CustomFieldType} from "@/src/persistance/CustomFields";
 import {getStoryCommandRequest, parseCommands} from "@/src/StoryNodeTracker";
+import {CUR_NODE} from "@/src/app/storyScreenConstants";
 
 
 describe('getStoryCommandRequest', () => {
@@ -183,5 +184,26 @@ describe('parseCommands', () => {
     it('should handle ADD NUMBER on undefined fields gracefully', () => {
         const storyText = 'Your new score is <ADD NUMBER SCORE2 10>';
         expect(() => parseCommands(storyText)).toThrow("WARN: SCORE2 UNDEFINED");
+    });
+
+    it('should handle NUMBER on undefined fields gracefully', () => {
+        CustomFields.setString('WEAPON', 'Sword');
+        const storyCondition = ``;
+        const parsedContition = parseCommands(storyCondition, true).newText;
+        const result = eval(parsedContition)
+
+
+        expect(0);
+    });
+
+    it('should g  NUMBER on undefined fields gracefully', () => {
+        const curNode = "test";
+        CustomFields.clear();
+        CustomFields.setString(CUR_NODE, curNode);
+
+        expect(CustomFields.getString(CUR_NODE)).toEqual(curNode);
+
+        CustomFields.clear();
+        expect(CustomFields.getString(CUR_NODE)).toEqual(undefined);
     });
 });

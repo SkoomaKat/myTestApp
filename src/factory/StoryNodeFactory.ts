@@ -1,26 +1,43 @@
-import nodeData from "@nodeData/nodes.json";
 import {StoryNode, StoryNodeProps} from "@/src/models/StoryNode";
+import {Persistence} from "@/src/persistance/Persistence";
+import {CustomFields} from "@/src/persistance/CustomFields";
+import {CUR_CHAPTER} from "@/src/app/storyScreenConstants";
 
+const ChapterRegistry: { [key: string]: any } = {
+    CHAPTER_1: require('@nodeData/nodes.json'),
+    CHAPTER_2: require('@nodeData/chapter_2.json')
+};
 
 export type NodeData = {
     [key: string]: StoryNodeProps;
 };
 
 export class StoryNodeFactory {
-    private static readonly nodes: NodeData = nodeData;
+    private static nodes: NodeData = ChapterRegistry.CHAPTER_1;
+
+    public static setChapter(chapterId: string) {
+        console.log(`StoryNodeFactory.setChapter(${chapterId})`);
+        this.nodes = ChapterRegistry[chapterId];
+    }
 
     public static getStoryNodeById(nodeId: string) {
-        const node = this.nodes[nodeId];
+        let node = undefined;
 
-        if (!nodeData) {
-            throw new Error(`Node with id ${nodeId} not found.`);
+        const splitId = nodeId.split(".");
+        if (splitId.length > 1) {
+            const chapter = splitId[0];
+
+            CustomFields.setString(CUR_CHAPTER, chapter);
+            this.setChapter(chapter);
+            node = this.nodes[splitId[1]];
+        } else {
+            node = this.nodes[nodeId];
         }
 
-        // Create and return a new StoryNode using the data
         return new StoryNode({
-            text: node.text,
-            mapId: node.mapId,
-            storyBranchProps: node.storyBranchProps
+            storyText: node.storyText,
+            storyImageId: node.storyImageId,
+            nodeBranches: node.nodeBranches
         });
     }
 }
