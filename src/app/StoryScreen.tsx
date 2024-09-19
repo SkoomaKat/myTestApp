@@ -6,8 +6,8 @@ import {parseCommands, StoryNodeTracker} from "@/src/StoryNodeTracker";
 import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 import {StringUtils} from "@/src/util/utils";
 import {CUR_CHAPTER, CUR_NODE, STORY_STACK, storyScreenStyles} from "@/src/app/storyScreenConstants";
-import {CustomFields} from "@/src/persistance/CustomFields";
 import {Persistence} from "@/src/persistance/Persistence";
+import {CustomFields} from "@/src/persistance/CustomFields";
 
 const defaultNodeId = "0";
 let nodeTracker: StoryNodeTracker;
@@ -25,11 +25,11 @@ export default function StoryScreen() {
             } catch (error) {
                 console.error("Error loading game data:", error)
             } finally {
-                const nodeIdToUse = CustomFields.getString(CUR_NODE) || defaultNodeId;
-                StoryNodeFactory.setChapter(CustomFields.getString(CUR_CHAPTER) || "CHAPTER_1");
+                const nodeIdToUse = CustomFields.getStringOrElse(CUR_NODE, defaultNodeId);
+                StoryNodeFactory.setChapter(CustomFields.getStringOrElse(CUR_CHAPTER, "CHAPTER_1"));
 
                 nodeTracker = new StoryNodeTracker(StoryNodeFactory.getStoryNodeById(nodeIdToUse), nodeIdToUse);
-                const loadedStoryStack = CustomFields.getString(STORY_STACK);
+                const loadedStoryStack = CustomFields.getStringOrElse(STORY_STACK, undefined);
 
                 if (loadedStoryStack) {
                     console.log(`Setting story stack: ${loadedStoryStack}`)

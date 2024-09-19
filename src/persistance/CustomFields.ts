@@ -1,5 +1,4 @@
 import {CUR_CHAPTER, CUR_NODE, STORY_STACK} from "@/src/app/storyScreenConstants";
-import {Persistence} from "@/src/persistance/Persistence";
 
 
 export class CustomFields {
@@ -14,17 +13,28 @@ export class CustomFields {
         this.customNumbers.set(key, value)
     }
 
-    public static getString(key: string, wrapped: boolean = false) {
-        if (key == CUR_NODE || key == CUR_CHAPTER || key == STORY_STACK) {
-            return this.customStrings.get(key);
-        }
+    public static getStringOrElse(key: string, orElse: any) {
+        return this.customStrings.get(key) || orElse;
+    }
 
-        if (wrapped) return `"${this.customStrings.get(key)}"` || `WARN: ${key} UNDEFINED`;
-        return this.customStrings.get(key) || `WARN: ${key} UNDEFINED`;
+    public static getString(key: string, wrapped: boolean = false) {
+        const value = this.customStrings.get(key);
+
+        if (value) {
+            return wrapped ? `"${value}"` : value;
+        } else {
+            throw Error(`Attempted to retrieve CustomFields unset string: ${key}`);
+        }
     }
 
     public static getNumber(key: string) {
-        return this.customNumbers.get(key) || `WARN: ${key} UNDEFINED`;
+        const value = this.customNumbers.get(key);
+
+        if (value) {
+            return value;
+        } else {
+            throw Error(`Attempted to retrieve CustomFields unset number: ${key}`);
+        }
     }
 
     public static get strings() {

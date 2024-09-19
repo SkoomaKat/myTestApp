@@ -11,7 +11,14 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "setupFiles": ["./__mocks__/@react-native-async-storage/async-storage.js"]
+    "setupFiles": ["./__mocks__/@react-native-async-storage/async-storage.js"],
+    "testRegex": "(/tst/.*|(\\.|/)(test|spec))\\.(ts|js)$",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1",
+      "^@maps/(.*)$": "<rootDir>/assets/maps/$1",
+      "^@images/(.*)$": "<rootDir>/assets/images/$1",
+      "^@nodeData/(.*)$": "<rootDir>/assets/nodeData/$1"
+    }
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",

@@ -49,7 +49,7 @@ export function parseCommands(storyText: string, wrapped: boolean = false): Pars
     let commandsParsed = 0;
 
     // Replace all occurrences and execute the commands.
-    const newText = storyText.replace(regex, (match, command) => {
+    const newText = storyText.replace(regex, (command) => {
         commandsParsed += 1;
         return StoryCommand.resolveCommand(getStoryCommandRequest(command), wrapped);
     });
@@ -58,7 +58,8 @@ export function parseCommands(storyText: string, wrapped: boolean = false): Pars
 }
 
 export function getStoryCommandRequest(commandString: string): StoryCommandRequest {
-    // Split the commandString into parts
+    commandString = commandString.replaceAll(/[<>]/g, '');
+    console.log(`getStoryCommandRequest(${commandString})`);
     const parts = commandString.trim().split(/\s+/);
 
     if (parts.length < 3) {

@@ -96,7 +96,7 @@ describe('getStoryCommandRequest', () => {
 
 
 
-describe('parseCommands', () => {
+describe('parseCommands tests', () => {
     beforeEach(() => {
         // Clear any state in CustomFields before each test to ensure no leftover data
         CustomFields.setString('NAME', '');
