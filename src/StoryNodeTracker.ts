@@ -38,6 +38,10 @@ export class StoryNodeTracker {
     public get nodeTexts(): string[] {
         return this.storyNodeStack.map(node => node.text);
     }
+
+    public setNodeTexts(nodeTexts: string[]) {
+        this.storyNodeStack = [...nodeTexts.map((text) => new StoryNode({nodeBranches: [], storyText: text})), this.storyNodeStack[this.storyNodeStack.length - 1]]
+    }
 }
 
 export function parseCommands(storyText: string, wrapped: boolean = false): ParseCommandResponse {

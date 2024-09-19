@@ -1,17 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View, Image} from 'react-native';
+import {ScrollView, TouchableOpacity, View, Image} from 'react-native';
 import {Text} from '@/src/components/Themed';
 import {StoryNodeFactory} from '@/src/factory/StoryNodeFactory';
 import {parseCommands, StoryNodeTracker} from "@/src/StoryNodeTracker";
 import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 import {StringUtils} from "@/src/util/utils";
-import {CUR_NODE, PROFILE, storyScreenStyles} from "@/src/app/storyScreenConstants";
+import {CUR_CHAPTER, CUR_NODE, STORY_STACK, storyScreenStyles} from "@/src/app/storyScreenConstants";
 import {CustomFields} from "@/src/persistance/CustomFields";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Persistence} from "@/src/persistance/Persistence";
 
 const defaultNodeId = "0";
-let nodeTracker: StoryNodeTracker; // Define nodeTracker outside of the component
+let nodeTracker: StoryNodeTracker;
 
 export default function StoryScreen() {
     const scrollViewRef = useRef<ScrollView>(null);
@@ -22,12 +21,23 @@ export default function StoryScreen() {
     useEffect(() => {
         const loadNodeTracker = async () => {
             try {
-                await Persistence.loadGame(PROFILE);
+                await Persistence.loadGame();
             } catch (error) {
-                console.error("Error loading game data:", error);
+                console.error("Error loading game data:", error)
             } finally {
                 const nodeIdToUse = CustomFields.getString(CUR_NODE) || defaultNodeId;
+                StoryNodeFactory.setChapter(CustomFields.getString(CUR_CHAPTER) || "CHAPTER_1");
+
                 nodeTracker = new StoryNodeTracker(StoryNodeFactory.getStoryNodeById(nodeIdToUse), nodeIdToUse);
+                const loadedStoryStack = CustomFields.getString(STORY_STACK);
+
+                if (loadedStoryStack) {
+                    console.log(`Setting story stack: ${loadedStoryStack}`)
+                    nodeTracker.setNodeTexts(JSON.parse(loadedStoryStack));
+                    setStoryStack(JSON.parse(loadedStoryStack));
+                } else {
+                    setStoryStack([...nodeTracker.nodeTexts]);
+                }
 
                 setStoryStack([...nodeTracker.nodeTexts]);
                 scrollToBottom();
@@ -54,7 +64,8 @@ export default function StoryScreen() {
                 scrollToBottom(); // Scroll to the bottom after updating the stack
 
                 CustomFields.setString(CUR_NODE, selectedBranch.nodeId);
-                await Persistence.saveGame(PROFILE);
+                CustomFields.setString(STORY_STACK, JSON.stringify(storyStack))
+                await Persistence.saveGame();
             }
         }
     };
@@ -71,6 +82,19 @@ export default function StoryScreen() {
 
     return (
         <View style={storyScreenStyles.container}>
+
+            <View style={storyScreenStyles.navbar}>
+                <TouchableOpacity style={storyScreenStyles.navbarButton}>
+                    <Text style={storyScreenStyles.navbarButtonText}>1</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={storyScreenStyles.navbarButton}>
+                    <Text style={storyScreenStyles.navbarButtonText}>2</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={storyScreenStyles.navbarButton}>
+                    <Text style={storyScreenStyles.navbarButtonText}>3</Text>
+                </TouchableOpacity>
+            </View>
+
             <ScrollView
                 style={storyScreenStyles.storyBox}
                 scrollEnabled={true}

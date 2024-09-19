@@ -1,4 +1,4 @@
-import {CUR_NODE, PROFILE} from "@/src/app/storyScreenConstants";
+import {CUR_CHAPTER, CUR_NODE, STORY_STACK} from "@/src/app/storyScreenConstants";
 import {Persistence} from "@/src/persistance/Persistence";
 
 
@@ -15,7 +15,7 @@ export class CustomFields {
     }
 
     public static getString(key: string, wrapped: boolean = false) {
-        if (key == CUR_NODE) {
+        if (key == CUR_NODE || key == CUR_CHAPTER || key == STORY_STACK) {
             return this.customStrings.get(key);
         }
 

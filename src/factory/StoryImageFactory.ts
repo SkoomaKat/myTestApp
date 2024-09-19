@@ -5,7 +5,7 @@ const mapRegistry: { [key: string]: any } = {
 };
 
 const imageRegistry: { [key: string]: any } = {
-    TEST_IMAGE: require('@maps/testMap.png'),
+    PROFILE: require('@images/profile.jpg'),
     BARREN_1: require('@images/BARREN_1.jpg'),
     TAVERN_1: require('@images/TAVERN_1.jpg'),
     ENDING_FROZEN: require('@images/ENDING_FROZEN.jpg'),

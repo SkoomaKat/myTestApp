@@ -1,8 +1,9 @@
 import {Platform, StyleSheet} from "react-native";
 
 export const isWeb = Platform.OS == 'web';
-export const PROFILE = "profile1"
 export const CUR_NODE = "CUR_NODE";
+export const CUR_CHAPTER = "CUR_CHAPTER";
+export const STORY_STACK = "STORY_STACK";
 
 
 export const storyScreenStyles = StyleSheet.create({
@@ -11,6 +12,22 @@ export const storyScreenStyles = StyleSheet.create({
         paddingTop: '5%', // Adjust for phone margins
         paddingHorizontal: 20,
         backgroundColor: 'black',
+    },
+    navbar: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    navbarButton: {
+        padding: 10,
+        backgroundColor: '#555',
+        borderRadius: 5,
+    },
+    navbarButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
     },
     storyBox: {
         borderRadius: 10,

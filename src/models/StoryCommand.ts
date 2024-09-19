@@ -56,7 +56,7 @@ export class StoryCommand {
         } else if (commandRequest.fieldType === CustomFieldType.STRING) {
             switch (commandRequest.commandType) {
                 case StoryCommandType.GET:
-                    return CustomFields.getString(commandRequest.fieldName, wrapped);
+                    return CustomFields.getString(commandRequest.fieldName, wrapped) || "";
 
                 case StoryCommandType.SET:
                     CustomFields.setString(commandRequest.fieldName, commandRequest.fieldValue || "");

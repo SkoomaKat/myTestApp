@@ -5,7 +5,7 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     TouchableOpacity,
-    ScrollView, Platform, Button, Alert
+    ScrollView, Platform, Alert
 } from 'react-native';
 import {Text, View} from '@/src/components/Themed';
 import Svg, {Line} from 'react-native-svg';
@@ -26,8 +26,6 @@ import {
 import TextOverlay from "@/src/app/Editor/components/TextOverlay";
 import {StoryNodeProps} from "@/src/models/StoryNode";
 import {StoryBranchProps} from "@/src/models/StoryBranch";
-import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
 
 const {width, height} = Dimensions.get('window');
 

@@ -3,11 +3,6 @@ import {ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View } from '@/src/components/Themed';
 import {router} from "expo-router";
-import {Persistence} from "@/src/persistance/Persistence";
-import {CUR_NODE, NodeTracker, PROFILE} from "@/src/app/storyScreenConstants";
-import {StoryNodeTracker} from "@/src/StoryNodeTracker";
-import {StoryNodeFactory} from "@/src/factory/StoryNodeFactory";
-import {CustomFields} from "@/src/persistance/CustomFields";
 
 export default function MainMenu() {
   const navigation = useNavigation();
@@ -18,24 +13,27 @@ export default function MainMenu() {
           style={styles.background}
       >
         <View style={styles.container}>
-          <TouchableOpacity
-              style={styles.button}
-              onPress={() => {router.push('../StoryScreen')}}
-          >
-            <Text style={styles.buttonText}>Start</Text>
+
+          <TouchableOpacity style={styles.button}
+              onPress={() => {router.navigate('../StoryScreen')}}
+          ><Text style={styles.buttonText}>Play</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Load</Text>
+
+          <TouchableOpacity style={styles.button}
+                            onPress={() => {router.push('../ProfileSelection')}}
+          ><Text style={styles.buttonText}>Profiles</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
               style={styles.button}
               onPress={() => router.push('../Editor/NodeEditorScreen')}
-          >
-            <Text style={styles.buttonText}>Editor</Text>
+          ><Text style={styles.buttonText}>Editor</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Exit</Text>
           </TouchableOpacity>
+
         </View>
       </ImageBackground>
   );
