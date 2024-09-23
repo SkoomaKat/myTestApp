@@ -20,7 +20,7 @@ const mapSize = {
   height: 1317,
 }
 
-export default function TabThreeScreen() {
+export default function MapScreen() {
   const handleWaypointPress = (waypoint: string) => {
     Alert.alert(`Waypoint ${waypoint} pressed!`);
     // Perform your desired action here
