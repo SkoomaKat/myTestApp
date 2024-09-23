@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from '@/src/components/Themed';
 import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 import {Persistence, Profile} from "@/src/persistance/Persistence";
-import {router} from "expo-router";
+import {router, useNavigation} from "expo-router";
 
 export default function ProfileSelection() {
     const [deleteSelected, setdeleteSelected] = useState(false);
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerTitleStyle: {
+                color: 'transparent'
+            },
+            headerShown: false
+        });
+    }, [navigation]);
 
     const getDeleteButton = () => {
         const deleteButtonStyle = {
@@ -37,7 +47,7 @@ export default function ProfileSelection() {
             Persistence.setProfile(curProfile);
             setdeleteSelected(!deleteSelected);
         } else {
-            router.push('/(tabs)');
+            router.replace('/');
         }
     }
 

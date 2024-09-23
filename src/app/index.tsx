@@ -7,7 +7,7 @@ import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 import {useEffect} from "react";
 
 
-export default function Index() {
+export default function index() {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Index() {
   const Button = (text: string, pressAction: any) => {
     return (
         <TouchableOpacity
-            onPress={() => pressAction}
+            onPress={pressAction}
             style={styles.button}
             activeOpacity={0.75}
         >
@@ -45,7 +45,7 @@ export default function Index() {
 
   const EditorButton = () => {
     if (isWeb) {
-      return Button('Editor', '../Editor/NodeEditorScreen');
+      return Button('Editor', () => router.replace('../Editor/NodeEditorScreen'));
     }
   }
 
@@ -60,7 +60,6 @@ export default function Index() {
           {Button('Play', () => (router.replace('../StoryScreen')))}
           {Button('Profiles', () => (router.replace('../ProfileSelection')))}
           {EditorButton()}
-          {Button('Exit', () => (BackHandler.exitApp()))}
 
         </View>
       </ImageBackground>

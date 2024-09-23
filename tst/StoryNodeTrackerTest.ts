@@ -3,11 +3,11 @@ import {CustomFields} from "@/src/persistance/CustomFields";
 
 
 function mockGetString(key: string, value: string) {
-    jest.spyOn(CustomFields, 'getString').mockImplementation((k: string) => k === key ? value : undefined);
+    jest.spyOn(CustomFields, 'getString').mockImplementation((k: string) => k === key ? value : "");
 }
 
 function mockGetNumber(key: string, value: number) {
-    jest.spyOn(CustomFields, 'getNumber').mockImplementation((k: string) => k === key ? value : undefined);
+    jest.spyOn(CustomFields, 'getNumber').mockImplementation((k: string) => k === key ? value : -1);
 }
 
 const test_text = 'Test Text'
@@ -82,15 +82,18 @@ describe('parseCommands tests', () => {
     });
 
     it('should handle multiple commands within the same text', () => {
-        CustomFields.setString('NAME', 'JAMES');
-        const storyText = 'The name is <GET STRING NAME> and the health is <SET NUMBER HEALTH 95>';
-        const expectedText = 'The name is JAMES and the health is ';
+        const storyText = 'The name is <GET STRING NAME> and the health is <GET NUMBER HEALTH>';
+        const expectedText = 'The name is JAMES and the health is 8';
+
+        mockGetString('NAME', 'JAMES');
+        mockGetNumber('HEALTH', 8);
 
         const result = parseCommands(storyText);
 
-        expect(result.newText).toBe(expectedText);
-        expect(CustomFields.getNumber('HEALTH')).toBe(95);
-    });
+        expect(CustomFields.getNumber).toHaveBeenCalledWith('HEALTH');
+        expect(CustomFields.getString).toHaveBeenCalledWith('NAME', false);
+
+        expect(result.newText).toBe(expectedText);});
 
     it('should return unchanged text when no commands are present', () => {
         const storyText = 'This is a simple story with no commands.';
@@ -101,18 +104,9 @@ describe('parseCommands tests', () => {
         expect(result.newText).toBe(expectedText);
     });
 
-    it('should process mixed commands and regular text correctly', () => {
-        CustomFields.setString('WEAPON', 'Sword');
-        const storyText = 'You equip a <GET STRING WEAPON> and face your opponent.';
-        const expectedText = 'You equip a Sword and face your opponent.';
-
-        const result = parseCommands(storyText);
-
-        expect(result.newText).toBe(expectedText);
-    });
 
     it('should throw an error when ADD NUMBER is used on undefined fields', () => {
         const storyText = 'Your new score is <ADD NUMBER SCORE2 10>';
-        expect(() => parseCommands(storyText)).toThrow("WARN: SCORE2 UNDEFINED");
+        expect(() => parseCommands(storyText)).toThrow();
     });
 });

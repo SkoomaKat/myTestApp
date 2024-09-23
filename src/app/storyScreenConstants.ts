@@ -9,30 +9,30 @@ export const STORY_STACK = "STORY_STACK";
 export const storyScreenStyles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: '5%', // Adjust for phone margins
-        paddingHorizontal: 20,
         backgroundColor: 'black',
     },
     navbar: {
+        marginTop: 60,
+        width: '100%',
+        position:'absolute',
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 10,
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'transparent',
     },
     navbarButton: {
         padding: 10,
-        backgroundColor: '#555',
+        backgroundColor: 'transparent',
         borderRadius: 5,
+        width: 75,
+        height: 75
     },
     navbarButtonText: {
         color: '#fff',
         fontWeight: 'bold',
     },
     storyBox: {
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        paddingVertical: 0,
+        paddingHorizontal: 20,
         backgroundColor: 'transparent',
     },
     storyBoxContent: {
@@ -42,16 +42,28 @@ export const storyScreenStyles = StyleSheet.create({
         flexGrow: 1,
     },
     storyText: {
-        color: '#d4d4d4',
+        color: '#3b3b3b',
+        shadowOpacity: 0.2,
         fontSize: isWeb ? 18 : 16,
-        marginBottom: isWeb ? 20 : 10,
-        width: isWeb ? "70%" : "85%",
     },
     latestStoryText: {
-        color: 'white',
+        color: 'black',
+        shadowOpacity: 0.2,
         fontSize: isWeb ? 18 : 16,
+    },
+    oldPage: {
+        resizeMode: 'cover',
+        minWidth: isWeb ? "70%" : "85%",
+        maxWidth: isWeb ? "70%" : "85%",
+        marginTop: 1,
+        padding: '5%'
+    },
+    latestPage: {
+        resizeMode: 'cover',
+        marginTop: 5,
+        maxWidth: isWeb ? "75%" : "90%",
         marginBottom: isWeb ? 20 : 10,
-        width: isWeb ? "75%" : "90%",
+        padding: '5%'
     },
     buttonContainer: {
         flexDirection: 'column',
@@ -62,7 +74,7 @@ export const storyScreenStyles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     button: {
-        backgroundColor: 'gray',
+        backgroundColor: 'transparent',
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 30,
@@ -72,14 +84,16 @@ export const storyScreenStyles = StyleSheet.create({
         overflow: 'hidden',
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontSize: isWeb ? 18 : 16,
         fontWeight: 'bold',
     },
     inlineImage: {
-        resizeMode: "contain",
+        resizeMode: 'cover',
         alignContent: 'center',
-        maxWidth: '90%',
+        marginTop: 1,
+        minWidth: isWeb ? "70%" : "85%",
+        maxWidth: isWeb ? "70%" : "85%",
         maxHeight: "60%",
     },
 });

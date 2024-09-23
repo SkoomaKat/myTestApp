@@ -1,58 +1,57 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {ScrollView, Image, StyleSheet, View, TouchableOpacity, Alert, Platform} from 'react-native';
 import {map} from "yaml/dist/schema/common/map";
 import {StoryBranch} from "@/src/models/StoryBranch";
 import {StoryNode} from "@/src/models/StoryNode";
 import {StoryImageFactory} from "@/src/factory/StoryImageFactory";
 
-const rootnode = new StoryNode({
-  storyText: "Welcome to TextGame",
-  storyImageId: 'TEST_MAP',
-  nodeBranches: [
-    { linkedNodeId: "", storyPrompt: "Prompt 1" },
-    { linkedNodeId: "", storyPrompt: "Prompt 2" },
-    { linkedNodeId: "", storyPrompt: "Prompt 3" },
-  ]
-});
+const map_img = StoryImageFactory.getStoryMap(('REGION_ICE'));
 
 const mapSize = {
-  width: 2048,
-  height: 1317,
+  width: 1728,
+  height: 847,
 }
 
 export default function MapScreen() {
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  const waypointX = 565;
+  const waypointY = 477;
+
   const handleWaypointPress = (waypoint: string) => {
     Alert.alert(`Waypoint ${waypoint} pressed!`);
-    // Perform your desired action here
   };
+
+  useEffect(() => {
+    const scrollToX = Math.max(waypointX, 0);
+    const scrollToY = Math.max(waypointY, 0);
+
+  }, []);
 
   return (
       <ScrollView
+          ref={scrollViewRef}
           contentContainerStyle={styles.contentContainer}
           style={styles.container}
           scrollEnabled={true}
           persistentScrollbar={true}
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={true}
-          bounces={false} // Prevents bounce effect on web
-          pinchGestureEnabled={Platform.OS !== 'web'} // Disable pinch-zoom for web
-          minimumZoomScale={0}
-          maximumZoomScale={100}
+          bounces={false}
+          pinchGestureEnabled={Platform.OS !== 'web'}
+          minimumZoomScale={1}
+          maximumZoomScale={10}
           scrollToOverflowEnabled={true}
           scrollsToTop={false}
       >
         <Image
-            source={rootnode.map?.image}
+            source={StoryImageFactory.getStoryMap(('REGION_ICE'))}
             style={styles.map}
         />
         {/* Example Waypoints */}
         <TouchableOpacity
-            style={[styles.waypoint, { top: 100, left: 150 }]} // Adjust coordinates for your specific waypoint
+            style={[styles.waypoint, { top: 477 - 15, left: 565 - 15 }]} // Adjust coordinates for your specific waypoint
             onPress={() => handleWaypointPress('1')}
-        />
-        <TouchableOpacity
-            style={[styles.waypoint, { top: 200, left: 250 }]} // Adjust coordinates for your specific waypoint
-            onPress={() => handleWaypointPress('2')}
         />
       </ScrollView>
   );
@@ -61,7 +60,8 @@ export default function MapScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'hidden', // Prevents scrollbars from hiding the content
+    overflow: 'hidden',
+    backgroundColor: 'black'
   },
   contentContainer: mapSize,
   map: {

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, TouchableOpacity, View, Image} from 'react-native';
+import {ScrollView, TouchableOpacity, View, Image, ImageBackground} from 'react-native';
 import {Text} from '@/src/components/Themed';
 import {StoryNodeFactory} from '@/src/factory/StoryNodeFactory';
 import {parseCommands, StoryNodeTracker} from "@/src/StoryNodeTracker";
@@ -8,6 +8,7 @@ import {StringUtils} from "@/src/util/utils";
 import {CUR_CHAPTER, CUR_NODE, STORY_STACK, storyScreenStyles} from "@/src/app/storyScreenConstants";
 import {Persistence} from "@/src/persistance/Persistence";
 import {CustomFields} from "@/src/persistance/CustomFields";
+import {router, useNavigation} from "expo-router";
 
 const defaultNodeId = "0";
 let nodeTracker: StoryNodeTracker;
@@ -17,6 +18,16 @@ export default function StoryScreen() {
     const [storyStack, setStoryStack] = useState<string[]>([]); // Story text stack
     const [isLoading, setIsLoading] = useState(true); // Loading state
 
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerTitleStyle: {
+                color: 'transparent'
+            },
+            headerShown: false
+        });
+    }, [navigation]);
 
     useEffect(() => {
         const loadNodeTracker = async () => {
@@ -42,7 +53,6 @@ export default function StoryScreen() {
                 setStoryStack([...nodeTracker.nodeTexts]);
                 scrollToBottom();
                 setIsLoading(false);
-
             }
         };
 
@@ -77,24 +87,11 @@ export default function StoryScreen() {
     };
 
     if (isLoading) {
-        return <Text>Loading...</Text>; // Show loading text while data is being fetched
+        return <Text>Loading...</Text>;
     }
 
     return (
         <View style={storyScreenStyles.container}>
-
-            <View style={storyScreenStyles.navbar}>
-                <TouchableOpacity style={storyScreenStyles.navbarButton}>
-                    <Text style={storyScreenStyles.navbarButtonText}>1</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={storyScreenStyles.navbarButton}>
-                    <Text style={storyScreenStyles.navbarButtonText}>2</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={storyScreenStyles.navbarButton}>
-                    <Text style={storyScreenStyles.navbarButtonText}>3</Text>
-                </TouchableOpacity>
-            </View>
-
             <ScrollView
                 style={storyScreenStyles.storyBox}
                 scrollEnabled={true}
@@ -114,25 +111,72 @@ export default function StoryScreen() {
                         />
                     else {
                         let textStyle = {};
+                        let pageStyle = {};
 
                         if (index == storyStack.length - 1) {
                             textStyle = storyScreenStyles.latestStoryText;
+                            pageStyle = storyScreenStyles.latestPage;
                         } else if (index == storyStack.length - 2) {
                             const lastNodeIsImage = storyStack[storyStack.length - 1].match(imagePattern);
 
                             if (lastNodeIsImage) {
                                 textStyle = storyScreenStyles.latestStoryText;
+                                pageStyle = storyScreenStyles.latestPage;
                             } else {
                                 textStyle = storyScreenStyles.storyText;
+                                pageStyle = storyScreenStyles.oldPage;
                             }
                         } else {
                             textStyle = storyScreenStyles.storyText;
+                            pageStyle = storyScreenStyles.oldPage;
                         }
 
-                        return <Text onLayout={() => scrollToBottom()} key={index} style={textStyle}>{text}</Text>
+                        return (
+                            <ImageBackground
+                                source={StoryImageFactory.getStoryImage('PAGE_1')}
+                                style={pageStyle}
+                                resizeMethod='resize'
+                            >
+                                <Text onLayout={() => scrollToBottom()} key={index} style={textStyle}>{text}</Text>
+                            </ImageBackground>
+                        )
                     }
                 })}
             </ScrollView>
+
+            <View style={storyScreenStyles.navbar}>
+                <ImageBackground
+                    source={StoryImageFactory.getStoryImage('MAP_ICON')}
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        overflow: 'visible',
+                    }}
+                    resizeMode='contain'
+                >
+                    <TouchableOpacity
+                        style={storyScreenStyles.navbarButton}
+                        onPress={() => router.navigate('/MapScreen')}
+                    >
+                    </TouchableOpacity>
+                </ImageBackground>
+
+                <ImageBackground
+                    source={StoryImageFactory.getStoryImage('HOME_MENU')}
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        overflow: 'visible',
+                    }}
+                    resizeMode='contain'
+                >
+                    <TouchableOpacity
+                        style={storyScreenStyles.navbarButton}
+                        onPress={() => router.replace('/')}
+                    >
+                    </TouchableOpacity>
+                </ImageBackground>
+            </View>
 
             <View style={storyScreenStyles.buttonContainer}>
                 {nodeTracker.currentNode && nodeTracker.currentNode.nodeBranches.length > 0 ? (
@@ -143,9 +187,22 @@ export default function StoryScreen() {
                             if (StringUtils.isNullOrEmpty(branch.prompt)) {
                                 handleBranchClick(index);
                             } else return (
-                                <TouchableOpacity key={index} style={storyScreenStyles.button} onPress={() => handleBranchClick(index)}>
-                                    <Text style={storyScreenStyles.buttonText}>{branch.prompt}</Text>
-                                </TouchableOpacity>
+                                <ImageBackground
+                                    source={StoryImageFactory.getStoryImage('BUTTON_1')}
+                                    style={{
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        overflow: 'visible',
+                                        height: 65,
+                                        width: '100%'
+                                    }}
+                                    resizeMode='stretch'
+                                >
+                                    <TouchableOpacity key={index} style={storyScreenStyles.button}
+                                                      onPress={() => handleBranchClick(index)}>
+                                        <Text style={storyScreenStyles.buttonText}>{branch.prompt}</Text>
+                                    </TouchableOpacity>
+                                </ImageBackground>
                             )
                         }
                     })

@@ -1,5 +1,4 @@
 import {StoryNode, StoryNodeProps} from "@/src/models/StoryNode";
-import {Persistence} from "@/src/persistance/Persistence";
 import {CustomFields} from "@/src/persistance/CustomFields";
 import {CUR_CHAPTER} from "@/src/app/storyScreenConstants";
 

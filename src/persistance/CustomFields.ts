@@ -1,4 +1,3 @@
-import {CUR_CHAPTER, CUR_NODE, STORY_STACK} from "@/src/app/storyScreenConstants";
 
 
 export class CustomFields {
