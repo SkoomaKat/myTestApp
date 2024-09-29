@@ -16,6 +16,10 @@ export class CustomFields {
         return this.customStrings.get(key) || orElse;
     }
 
+    public static getNumberOrElse(key: string, orElse: any) {
+        return this.customNumbers.get(key) || orElse;
+    }
+
     public static getString(key: string, wrapped: boolean = false) {
         const value = this.customStrings.get(key);
 

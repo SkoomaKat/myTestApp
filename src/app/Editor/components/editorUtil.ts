@@ -1,7 +1,7 @@
 import { Node } from "../NodeEditorScreen"
 import {branchContainerHeight, nodeContainerHeight} from "@/src/app/Editor/components/constants";
 
-export const updateNodeField = (prevNodes: Node[], nodeId: string, newValue: string, field: string, branchIndex?: number) => {
+export const updateNodeField = (prevNodes: Node[], nodeId: string, newValue: any, field: string, branchIndex?: number) => {
     return prevNodes.map((node) => {
         if (node.id === nodeId) {
             if (branchIndex !== undefined) {

@@ -1,3 +1,4 @@
+import { Image } from 'react-native';
 import {ImageResolvedAssetSource} from "react-native";
 
 const mapRegistry: { [key: string]: any } = {
@@ -13,12 +14,16 @@ const storyImages: { [key: string]: any } = {
 };
 
 const uiImages: { [key: string]: any } = {
-    ABANDONED_LIBRARY_01: require('@images/0_UI/Abandoned_Library.jpeg'),
-    PROFILE: require('@images/0_UI/profile.jpg'),
-    BUTTON_1: require('@images/0_UI/Button.png'),
-    PAGE_1: require('@images/0_UI/Page.jpg'),
-    MAP_ICON: require('@images/0_UI/map.png'),
-    HOME_MENU: require('@images/0_UI/home.png')
+    ABANDONED_LIBRARY_01: require('@images/UI/TITLE_SCREEN.jpeg'),
+    PROFILE: require('@images/UI/PROFILE.jpg'),
+    BUTTON_1: require('@images/UI/PAGE_BUTTON.png'),
+    PAGE_1: require('@images/UI/PAGE_1.jpg'),
+    MAP_ICON: require('@images/UI/MAP_ICON.png'),
+    HOME_MENU: require('@images/UI/HOME_ICON.png'),
+    PLAYER_ARROW: require('@images/UI/PLAYER_ARROW.png'),
+    FLAG_WHITE: require('@images/UI/FLAG_WHITE.png'),
+    FLAG_RED: require('@images/UI/FLAG_RED.png'),
+    OPTIONS_LINES: require('@images/UI/OPTIONS_LINES.png')
 };
 
 const imageRegistry: { [key: string]: any } = {
@@ -28,10 +33,10 @@ const imageRegistry: { [key: string]: any } = {
 
 export class StoryImageFactory {
     public static getStoryMap(mapId: string): ImageResolvedAssetSource {
-        return mapRegistry[mapId];
+        return Image.resolveAssetSource(mapRegistry[mapId]);
     }
 
     public static getStoryImage(imageId: string): ImageResolvedAssetSource {
-        return imageRegistry[imageId];
+        return Image.resolveAssetSource(imageRegistry[imageId]);
     }
 }

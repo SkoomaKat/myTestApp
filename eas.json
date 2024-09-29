@@ -6,11 +6,19 @@
     "preview": {
       "android": {
         "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "distribution": "internal"
       }
     },
     "preview2": {
       "android": {
         "gradleCommand": ":app:assembleRelease"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "distribution": "internal"
       }
     },
     "preview3": {

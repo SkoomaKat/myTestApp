@@ -25,6 +25,7 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
     TangerineBold: require('../../assets/fonts/Tangerine-Bold.ttf'),
+    TangerineRegular: require('../../assets/fonts/Tangerine-Regular.ttf'),
     ...FontAwesome.font,
   });
 
@@ -52,8 +53,6 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
   );

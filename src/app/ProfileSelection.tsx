@@ -43,7 +43,7 @@ export default function ProfileSelection() {
         await Persistence.loadGame()
 
         if (deleteSelected) {
-            Persistence.delete_profile();
+            await Persistence.delete_profile();
             Persistence.setProfile(curProfile);
             setdeleteSelected(!deleteSelected);
         } else {

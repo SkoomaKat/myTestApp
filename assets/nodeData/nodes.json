@@ -1,1 +1,556 @@
-{"0":{"storyText":"Weeks have blurred into a timeless march, each step heavier than the last as you press forward on your journey. The silence around you feels endless, broken only by the crunch of your boots on barren soil.","nodeBranches":[{"linkedNodeId":"img1","storyPrompt":"","condition":""}]},"1":{"storyText":"The past few days have been the hardest. No towns, no villages, nothing but an empty horizon and the weight of your own thoughts. There’s no refuge here—just the biting cold and the unforgiving ground where you've been forced to rest.\n\nEach night you lie shivering beneath a sky too vast, too distant to offer comfort. Sleep eludes you, a fleeting dream in the wind. The frigid air creeps into your bones, and you pull your cloak tighter, but it’s never enough.","nodeBranches":[{"linkedNodeId":"2","storyPrompt":"Drudge along...","condition":""}]},"2":{"storyText":"You long for the warmth of a tavern, the hum of voices, the crackle of a fire. But more than anything, you crave a moment of peace—somewhere to be human again, if only for a little while...","nodeBranches":[{"linkedNodeId":"3","storyPrompt":"Keep going...","condition":""}]},"3":{"storyText":"By mid-afternoon, the pale sun hangs low in the sky, offering only a dim, distant warmth. Its light barely penetrates the dense, gray clouds that stretch across the heavens. Your legs ache with the strain of relentless travel, each step an effort that pulls from reserves you’re not sure you have left.\n\nThe landscape is a sea of dull, rolling hills, barren except for the occasional twisted tree or jagged stone, none of which offer respite. ","nodeBranches":[{"linkedNodeId":"4","storyPrompt":"Endure..","condition":""}]},"4":{"storyText":"The wind has picked up, sharp and bitter as it whistles through the empty land, cutting through your worn cloak like a knife. It feels as if the very earth beneath you is mocking your struggle, indifferent to your journey, to your pain.\n\nYour stomach growls—a hollow, aching reminder of how little you've eaten. The stale bread and dried meat you carry offer little comfort, but you force yourself to take a bite, chewing without tasting, the food nothing more than fuel to keep you moving.","nodeBranches":[{"linkedNodeId":"5","storyPrompt":"Endure.. hungrily.","condition":""}]},"5":{"storyText":"Ahead, the horizon stretches endlessly, no sign of life, no shelter. You scan the distance for something—anything—but the world remains barren, a mirror to your growing despair. Every hour spent in this wasteland is a reminder of how alone you truly are, how far removed from warmth and comfort you’ve become.","nodeBranches":[{"linkedNodeId":"23","storyPrompt":"...","condition":""}]},"6":{"storyText":"Yet, as your eyes drift over the empty expanse, you see it—a shape in the distance, faint and wavering like a mirage. Is it real, or just a cruel trick of the light? You squint against the wind, hoping, praying that it’s what you think it is.\n\nA building. No... wait—could it be? A tavern? Here, on this forsaken stretch of road? It doesn’t seem possible. There’s nothing else around, no signs of life for miles. And yet, somehow, standing alone in this deadly blizzard, is a mysterious tavern. Its weathered walls seem to materialize from the gloom, like a dream conjured from the edges of your desperation.","nodeBranches":[{"linkedNodeId":"9","storyPrompt":"...","condition":""}]},"7":{"storyText":"You hesitate, uncertainty gnawing at your thoughts. How could this be?<SET STRING TEMP_EVENT GO>","nodeBranches":[{"linkedNodeId":"10","storyPrompt":"Hang back and watch for a bit","condition":""},{"linkedNodeId":"14","storyPrompt":"Quickly go ahead to the tavern","condition":""}]},"9":{"storyText":"<GET IMAGE TAVERN_1>","nodeBranches":[{"linkedNodeId":"7","storyPrompt":"","condition":""}]},"10":{"storyText":"<SET STRING TEMP_EVENT WATCH>You stop in your tracks, instincts telling you to be cautious. There’s something off about this place, something that doesn’t sit right. A tavern, out here, in the middle of nowhere? It defies reason. You crouch down behind a jagged rock, your eyes fixed on the building as you let the cold wind and hail sting your face, grounding you in the reality of the moment.","nodeBranches":[{"linkedNodeId":"11","storyPrompt":"...","condition":""}]},"11":{"storyText":"The tavern stands eerily still, the faint outline of its structure wavering in the distance. Lights flicker from within, and smoke rises from a chimney. The road is empty, and the wind carries no sounds of life, just the endless, hollow gusts. Minutes stretch into what feels like hours. You scan the tavern and surrounding area, searching for movement, for any sign of danger, but see nothing save for a fleeting shadow move in one of the windows.","nodeBranches":[{"linkedNodeId":"12","storyPrompt":"...","condition":""}]},"12":{"storyText":"But the tavern stays, unmoving, solid against the bleak surroundings. Perhaps it’s real after all. You feel the weight of your exhaustion pull at you, the ache in your limbs urging you forward. Whatever lies inside, surely it’s better than another night on the frozen ground. You wonder how long the blizzard will last.\nYou must make a choice, you are falling asleep from exhaustion as you sit and think.","nodeBranches":[{"linkedNodeId":"13","storyPrompt":"Sleep outside","condition":""},{"linkedNodeId":"14","storyPrompt":"Enter the tavern","condition":""}]},"13":{"storyText":"You head out a ways from the tavern and find a spot to lay comfortably, or as comfortably as you can, fashioning a makeshift tent to protect you from the biting wind and hail. \nAfter a while you drift off, shivering from the cold.","nodeBranches":[{"linkedNodeId":"17","storyPrompt":"Sleep","condition":""}]},"14":{"storyText":"<SET STRING INKEEPER_PRESENT true>As you approach, the tavern grows clearer, the details sharpening. The wooden exterior is weathered, the windows fogged over. A faded sign swings violently and you can’t make out the name. Your heart pounds as your hand reaches for the door, your breath catching in your throat.\nYou pause just outside, the cold wind biting at your face as your fingers hover over the handle. For a moment, the wind howls louder, the world around you feeling impossibly still, as if waiting. Then, without thinking, you push the door open.","nodeBranches":[{"linkedNodeId":"15","storyPrompt":"...","condition":"<GET STRING TEMP_EVENT> == \"WATCH\""},{"linkedNodeId":"16","storyPrompt":"...","condition":"<GET STRING TEMP_EVENT> != \"WATCH\""}]},"15":{"storyText":"As you step into the tavern, the warmth hits you immediately, a welcome contrast to the bitter cold outside. The soft crackle of a fire fills the quiet room, and the smell of roasted meat and ale lingers in the air, though if there were any patrons they appear to have retired for the night. \nThe dim light from the hearth casts long shadows along the wooden floor, giving the space a cozy, if slightly worn, appearance.","nodeBranches":[{"linkedNodeId":"47","storyPrompt":"...","condition":""}]},"16":{"storyText":"As you step into the tavern, the warmth hits you immediately, a welcome contrast to the bitter cold outside. The soft crackle of a fire fills the quiet room, and the smell of roasted meat and ale lingers in the air, though if there were any patrons they appear to have retired for the night.\nThe dim light from the hearth casts long shadows along the wooden floor, giving the space a cozy, if slightly worn, appearance.","nodeBranches":[{"linkedNodeId":"48","storyPrompt":"...","condition":""}]},"17":{"storyText":"You dream of standing alone on a vast, frozen lake, an eerie silence surrounding you. In the distance, a faint light flickers, and you begin to walk toward it. The ice beneath your feet groans and shifts. \nA sharp crack pierces the stillness, and you freeze, your limbs heavy with cold.","nodeBranches":[{"linkedNodeId":"18","storyPrompt":"Lie flat to distribute your weight","condition":""},{"linkedNodeId":"18","storyPrompt":"Creep ahead slowly","condition":""},{"linkedNodeId":"18","storyPrompt":"Run!","condition":""}]},"18":{"storyText":"You try to move, but your body is numb, unyielding. The ice gives way beneath you, and you plunge into the dark, icy depths. ","nodeBranches":[{"linkedNodeId":"19","storyPrompt":"...","condition":""}]},"19":{"storyText":"The light fades, you never wake.","nodeBranches":[{"linkedNodeId":"21","storyPrompt":"The End?","condition":""}]},"21":{"storyText":"<GET IMAGE ENDING_FROZEN>","nodeBranches":[{"linkedNodeId":"the_end","storyPrompt":"","condition":""}]},"23":{"storyText":"As the hours pass, the weather worsens steadily, then before you know it a violent blizzard howls around you, the wind biting at your skin, and the swirling snow threatens to swallow you whole. \n\nYou need to find shelter—and fast. This storm is relentless. Could things possibly get worse?","nodeBranches":[{"linkedNodeId":"6","storyPrompt":"...","condition":""}]},"25":{"storyText":"He smiles broadly, the man’s energy is infectious, and despite the strange emptiness of the tavern, you feel a pull toward the warmth he offers. \n\"I'm Tam, nice to make your acquaintance.\" he says, with a slight bow, \"not many come this way, you know. Lucky for you, you found us just before the night turned even worse. I fear anyone out in this won't make it to morning.\", says the young innkeeper. \n\nAlmost as if on queue, you hear the beating of the wind and hail grow stronger. ","nodeBranches":[{"linkedNodeId":"26","storyPrompt":"Ask the price for food","condition":""},{"linkedNodeId":"27","storyPrompt":"Ask the price for a room","condition":""}]},"26":{"storyText":"\"I'm afraid we're no longer serving food or drink this late, you'd have to wait until morning. Though I assure you it's worth the wait. Our roasted potatoes are a delicacy.\", he says.","nodeBranches":[{"linkedNodeId":"27","storyPrompt":"Ask the price for a room","condition":""}]},"27":{"storyText":"The innkeeper’s smile widens, his eyes crinkling with good-natured amusement. \"Ah, no need to worry about that,\" he says, waving off your question with a casual flick of his hand. \"We don't charge travelers here. The night’s on the house. After all, out here, it’s more important that folks have a roof over their head than coins in their pocket, don’t you think?\"\n\n\"Of course! It's the least we can do for someone who's been through as much as you.\" He picks up a candle from the bar and lights it, the flame flickering in the low light. \"Let me show you to your room. You must be exhausted after that long journey.\"","nodeBranches":[{"linkedNodeId":"28","storyPrompt":"Follow","condition":""}]},"28":{"storyText":"You nod, though unease tightens in your gut. There's something about his cheerful insistence that feels... off. But your body is weary, and the thought of a soft bed is too tempting to resist. Pushing your doubts aside, you follow the innkeeper as he makes his way toward a wooden staircase.\n\nThe stairs creak underfoot as you ascend, the faint light of the candle casting strange, dancing shadows on the walls. Each step seems heavier than the last, your legs dragging as if the very air around you thickens with each passing moment. The innkeeper continues to hum quietly to himself, his movements brisk and easy.","nodeBranches":[{"linkedNodeId":"29","storyPrompt":"...","condition":""}]},"29":{"storyText":"He leads you down a narrow, dimly lit hallway. The walls here seem closer than they should be, the flickering candlelight warping their edges. The innkeeper stops at a door at the end of the hall, his hand resting on the old brass handle. He turns to you with that same ever-present smile.\n\n\"Here we are,\" he says, opening the door with a smooth push. The room beyond is simple but welcoming—a modest bed, a small table with a single chair, and a covered window that overlooks the snowy countryside. The firelight from the already lit hearth below casts faint shadows on the floorboards.","nodeBranches":[{"linkedNodeId":"30","storyPrompt":"Enter your room","condition":""}]},"30":{"storyText":"\"You’ll sleep soundly here,\" the innkeeper says, his voice gentle and reassuring. He steps inside and sets the candle down on the table. \"If you need anything, don’t hesitate to call for me. I’m just downstairs.\" He pauses by the door, his smile widening slightly, almost unnaturally so. \"You’re safe here. No need to worry about a thing.\"\n\nHe gives you a final nod before stepping back into the hallway. As the door closes softly behind him, the latch clicking into place, the room falls silent. You stand there, the faint flicker of the candle casting shadows on the walls. The bed looks inviting, but the air in the room feels thick—heavy with something unseen, like the space is watching you, waiting.","nodeBranches":[{"linkedNodeId":"31","storyPrompt":"Open the window","condition":""},{"linkedNodeId":"32","storyPrompt":"Sit in bed","condition":""}]},"31":{"storyText":"You step toward the window, but when you pull back the curtain, the glass is dark—impossibly dark. There’s no moon, no stars, just an inky void that feels like it’s pressing against the windowpane. Your reflection stares back at you, distorted slightly, and for a brief moment, you swear you see something move in the shadows behind you.\n\nYou spin around, but the room is empty. Just the candle flickering on the table.","nodeBranches":[{"linkedNodeId":"32","storyPrompt":"Sit in bed","condition":""}]},"32":{"storyText":"With a deep breath, you sit on the edge of the bed, but sleep feels far away now. Something about the innkeeper’s insistence, his too-kind smile, and the strange stillness of the place keeps your nerves on edge.\n\nSafe... you can’t shake the feeling that this place is anything but.","nodeBranches":[{"linkedNodeId":"33","storyPrompt":"Stay awake","condition":""},{"linkedNodeId":"36","storyPrompt":"Go to sleep","condition":""}]},"33":{"storyText":"You sit on the edge of the bed, determined to keep your eyes open, though your body betrays you. Every muscle aches from the long journey, and the warmth of the room seeps into your bones, making it harder to resist the pull of sleep. The flickering candlelight dances across the walls, casting long, wavering shadows that seem to twist and move just out of your vision.","nodeBranches":[{"linkedNodeId":"34","storyPrompt":"Stay awake","condition":""}]},"34":{"storyText":"Your thoughts drift, becoming muddled, distant. You tell yourself to stay awake, to keep your guard up. Something’s wrong here—you can feel it in your bones, but the exhaustion is too deep, too heavy. The rhythmic creak of the inn settling, the faint warmth from the candle, and the soft comfort of the bed all conspire against you.","nodeBranches":[{"linkedNodeId":"35","storyPrompt":"Stay awake","condition":""}]},"35":{"storyText":"Before you can fight it any longer, your head dips forward, your eyes closing for what you think is just a second. But the moment stretches, and your grip on consciousness slips away.\n\nYou fall into a deep, dreamless sleep.","nodeBranches":[{"linkedNodeId":"37","storyPrompt":"sleep...","condition":""}]},"36":{"storyText":"Every muscle aches from the long journey, and the warmth of the room seeps into your bones. \n\nThe bed is softer than anything you’ve felt in weeks, you lay down and allow your grip on consciousness to slip away as you fall into a deep, dreamless sleep.","nodeBranches":[{"linkedNodeId":"37","storyPrompt":"sleep...","condition":""}]},"37":{"storyText":"You awaken to the smell of food drifting up from below, rich and savory. For a moment, it’s comforting—a sharp contrast to the biting cold and emptiness you’ve endured on the road. But as your eyes open, the low howl of the blizzard outside pulls you back into reality.\n\nThe wind screams against the tavern walls, rattling the shutters with a fierce intensity. You glance toward the window—snow still piles up thickly against the glass, swirling in chaotic gusts. The storm hasn't let up; if anything, it’s gotten worse.","nodeBranches":[{"linkedNodeId":"38","storyPrompt":"Sit up","condition":""}]},"38":{"storyText":"You sit up, rubbing your eyes. The room is much as you left it, dimly lit by the gray light of morning leaking through the frosted window. The walls feel closer than they should, though that might just be the lingering disquiet from the night before. Still, the smell of hot food calls to you, and the exhaustion that weighed on your limbs seems to have eased after the night’s rest.","nodeBranches":[{"linkedNodeId":"39","storyPrompt":"Look out the window","condition":""},{"linkedNodeId":"41","storyPrompt":"Go downstairs","condition":""}]},"39":{"storyText":"You decide to spend a moment to assess the situation, you really should be back on the road as soon as possible.. \nTaking a look outside the window you see a well and shed that you didn't notice before. The blizzard is still raging, you wonder how long it will last.","nodeBranches":[{"linkedNodeId":"40","storyPrompt":"","condition":""}]},"40":{"storyText":"<GET IMAGE WINDOW_ROOM>","nodeBranches":[{"linkedNodeId":"41","storyPrompt":"Go downstairs","condition":""}]},"41":{"storyText":"Rising to your feet, you make your way to the door. The chill seeps through the cracks around the frame, but the warmth and the scent of breakfast pull you forward. You open the door and step out into the hallway, greeted by the muffled sounds of clattering dishes and faint voices from downstairs.\n\nThe tavern is quiet, save for the constant roar of the storm. As you descend the stairs, the smell of roasted meat and fresh bread grows stronger, tempting your empty stomach. The fire in the hearth crackles softly, throwing a dim glow over the room, though it feels more subdued now, as if the warmth is fighting to hold back the cold seeping in from outside.","nodeBranches":[{"linkedNodeId":"42","storyPrompt":"...","condition":""}]},"42":{"storyText":"The innkeeper stands behind the bar, humming a low tune as he arranges plates. His face brightens when he sees you. \"Good morning! Hope the storm didn’t keep you up too much,\" he says cheerfully, his tone almost too casual given the furious weather. \"Looks like it’s still going strong out there, but no need to worry. We’ve got food and warmth aplenty. Come, have a bite!\"\n\nHe gestures toward a table by the fire, already set with food—thick slices of bread, a plate of steaming stew, and a warm drink waiting beside it. The scene is so inviting, so normal, that it almost feels wrong.","nodeBranches":[{"linkedNodeId":"43","storyPrompt":"...","condition":""}]},"43":{"storyText":"You glance toward the window. Outside, the world is a swirling wall of white. No way to leave in this weather. The innkeeper’s smile widens, just a touch, his voice warm and welcoming as always. \"No need to rush off in a storm like this. Best to wait it out. You’re safe here.\"","nodeBranches":[{"linkedNodeId":"44","storyPrompt":"...","condition":""}]},"44":{"storyText":"Safe. That word again.\n\nThe food smells delicious, but as you sit at the table, something in the back of your mind keeps you on edge.","nodeBranches":[{"linkedNodeId":"45","storyPrompt":"...","condition":""}]},"45":{"storyText":"The stew before you looks inviting, the bread fresh, the drink warm. Outside, the blizzard rages, sealing you within this strange place.\n\nThe innkeeper hums softly to himself, watching you from the corner of his eye, his smile never fading. For a moment, everything seems normal—but just beneath the surface, something isn't right. You can feel it in the air, thick and heavy.","nodeBranches":[{"linkedNodeId":"46","storyPrompt":"To be continued...","condition":""}]},"46":{"storyText":"This is the end - for now. Feel free to play again!","nodeBranches":[{"linkedNodeId":"try_again","storyPrompt":"Play again","condition":""}]},"47":{"storyText":"Behind the counter, a young man greets you with a broad smile. His face is ruddy, his eyes gleaming with warmth and mirth. \"Ah, a weary traveler! You must be frozen to the bone, I worried you would freeze to death hiding out behind that rock. Come in, come in!\" His voice is rich and inviting, as though he’s been waiting for you all along. \nThis explains the shadow you saw in the window, though you're surprised he could see from such a distance in this weather.","nodeBranches":[{"linkedNodeId":"25","storyPrompt":"Approach the inkeeper","condition":""}]},"48":{"storyText":"Behind the counter, a young man greets you with a broad smile. His face is ruddy, his eyes gleaming with warmth and mirth. \"Ah, a weary traveler! You must be frozen to the bone, Come in, come in!\" His voice is rich and inviting, as though he’s been waiting for you all along.","nodeBranches":[{"linkedNodeId":"25","storyPrompt":"Approach the inkeeper","condition":""}]},"img1":{"storyText":"<GET IMAGE BARREN_1>","nodeBranches":[{"linkedNodeId":"1","storyPrompt":"Continue","condition":""}]},"the_end":{"storyText":"You have perished.","nodeBranches":[{"linkedNodeId":"try_again","storyPrompt":"Try Again","condition":""}]},"try_again":{"storyText":"<SET STRING TEMP_EVENT NONE>","nodeBranches":[{"linkedNodeId":"0","storyPrompt":"","condition":""}]},"tavern_main_room":{"storyText":"","nodeBranches":[{"linkedNodeId":"","storyPrompt":"Approach the innkeeper","condition":"<GET STRING INKEEPER_PRESENT> == 'true'"}]}}
+{
+  "img1": {
+    "storyText": "<GET IMAGE BARREN_1>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "1",
+        "storyPrompt": "Into the Mountains",
+        "condition": "",
+        "mapX": 700,
+        "mapY": 400
+      },
+      {
+        "linkedNodeId": "2",
+        "storyPrompt": "Into the Forest",
+        "condition": "",
+        "mapX": 687,
+        "mapY": 500
+      }
+    ]
+  },
+  "0": {
+    "storyText": "<SET NUMBER ISE_IS_MAP_NODE 1>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "01",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "01": {
+    "storyText": "Weeks have blurred into a timeless march, each step heavier than the last as you press forward on your journey. The silence around you feels endless, broken only by the crunch of your boots on barren soil.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "img1",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "1": {
+    "storyText": "The past few days have been the hardest. No towns, no villages, nothing but an empty horizon and the weight of your own thoughts. There’s no refuge here—just the biting cold and the unforgiving ground where you've been forced to rest.\n\nEach night you lie shivering beneath a sky too vast, too distant to offer comfort. Sleep eludes you, a fleeting dream in the wind. The frigid air creeps into your bones, and you pull your cloak tighter, but it’s never enough.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "2",
+        "storyPrompt": "Drudge along...",
+        "condition": ""
+      }
+    ]
+  },
+  "2": {
+    "storyText": "You long for the warmth of a tavern, the hum of voices, the crackle of a fire. But more than anything, you crave a moment of peace—somewhere to be human again, if only for a little while...",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "3",
+        "storyPrompt": "Keep going...",
+        "condition": ""
+      }
+    ]
+  },
+  "3": {
+    "storyText": "By mid-afternoon, the pale sun hangs low in the sky, offering only a dim, distant warmth. Its light barely penetrates the dense, gray clouds that stretch across the heavens. Your legs ache with the strain of relentless travel, each step an effort that pulls from reserves you’re not sure you have left.\n\nThe landscape is a sea of dull, rolling hills, barren except for the occasional twisted tree or jagged stone, none of which offer respite. ",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "4",
+        "storyPrompt": "Endure..",
+        "condition": ""
+      }
+    ]
+  },
+  "4": {
+    "storyText": "The wind has picked up, sharp and bitter as it whistles through the empty land, cutting through your worn cloak like a knife. It feels as if the very earth beneath you is mocking your struggle, indifferent to your journey, to your pain.\n\nYour stomach growls—a hollow, aching reminder of how little you've eaten. The stale bread and dried meat you carry offer little comfort, but you force yourself to take a bite, chewing without tasting, the food nothing more than fuel to keep you moving.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "5",
+        "storyPrompt": "Endure.. hungrily.",
+        "condition": ""
+      }
+    ]
+  },
+  "5": {
+    "storyText": "Ahead, the horizon stretches endlessly, no sign of life, no shelter. You scan the distance for something—anything—but the world remains barren, a mirror to your growing despair. Every hour spent in this wasteland is a reminder of how alone you truly are, how far removed from warmth and comfort you’ve become.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "23",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "6": {
+    "storyText": "Yet, as your eyes drift over the empty expanse, you see it—a shape in the distance, faint and wavering like a mirage. Is it real, or just a cruel trick of the light? You squint against the wind, hoping, praying that it’s what you think it is.\n\nA building. No... wait—could it be? A tavern? Here, on this forsaken stretch of road? It doesn’t seem possible. There’s nothing else around, no signs of life for miles. And yet, somehow, standing alone in this deadly blizzard, is a mysterious tavern. Its weathered walls seem to materialize from the gloom, like a dream conjured from the edges of your desperation.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "9",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "7": {
+    "storyText": "You hesitate, uncertainty gnawing at your thoughts. How could this be?<SET STRING TEMP_EVENT GO>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "10",
+        "storyPrompt": "Hang back and watch for a bit",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "14",
+        "storyPrompt": "Quickly go ahead to the tavern",
+        "condition": ""
+      }
+    ]
+  },
+  "9": {
+    "storyText": "<GET IMAGE TAVERN_1>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "7",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "10": {
+    "storyText": "<SET STRING TEMP_EVENT WATCH>You stop in your tracks, instincts telling you to be cautious. There’s something off about this place, something that doesn’t sit right. A tavern, out here, in the middle of nowhere? It defies reason. You crouch down behind a jagged rock, your eyes fixed on the building as you let the cold wind and hail sting your face, grounding you in the reality of the moment.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "11",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "11": {
+    "storyText": "The tavern stands eerily still, the faint outline of its structure wavering in the distance. Lights flicker from within, and smoke rises from a chimney. The road is empty, and the wind carries no sounds of life, just the endless, hollow gusts. Minutes stretch into what feels like hours. You scan the tavern and surrounding area, searching for movement, for any sign of danger, but see nothing save for a fleeting shadow move in one of the windows.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "12",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "12": {
+    "storyText": "But the tavern stays, unmoving, solid against the bleak surroundings. Perhaps it’s real after all. You feel the weight of your exhaustion pull at you, the ache in your limbs urging you forward. Whatever lies inside, surely it’s better than another night on the frozen ground. You wonder how long the blizzard will last.\nYou must make a choice, you are falling asleep from exhaustion as you sit and think.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "13",
+        "storyPrompt": "Sleep outside",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "14",
+        "storyPrompt": "Enter the tavern",
+        "condition": ""
+      }
+    ]
+  },
+  "13": {
+    "storyText": "You head out a ways from the tavern and find a spot to lay comfortably, or as comfortably as you can, fashioning a makeshift tent to protect you from the biting wind and hail. \nAfter a while you drift off, shivering from the cold.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "17",
+        "storyPrompt": "Sleep",
+        "condition": ""
+      }
+    ]
+  },
+  "14": {
+    "storyText": "<SET STRING INKEEPER_PRESENT true>As you approach, the tavern grows clearer, the details sharpening. The wooden exterior is weathered, the windows fogged over. A faded sign swings violently and you can’t make out the name. Your heart pounds as your hand reaches for the door, your breath catching in your throat.\nYou pause just outside, the cold wind biting at your face as your fingers hover over the handle. For a moment, the wind howls louder, the world around you feeling impossibly still, as if waiting. Then, without thinking, you push the door open.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "15",
+        "storyPrompt": "...",
+        "condition": "<GET STRING TEMP_EVENT> == \"WATCH\""
+      },
+      {
+        "linkedNodeId": "16",
+        "storyPrompt": "...",
+        "condition": "<GET STRING TEMP_EVENT> != \"WATCH\""
+      }
+    ]
+  },
+  "15": {
+    "storyText": "As you step into the tavern, the warmth hits you immediately, a welcome contrast to the bitter cold outside. The soft crackle of a fire fills the quiet room, and the smell of roasted meat and ale lingers in the air, though if there were any patrons they appear to have retired for the night. \nThe dim light from the hearth casts long shadows along the wooden floor, giving the space a cozy, if slightly worn, appearance.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "47",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "16": {
+    "storyText": "As you step into the tavern, the warmth hits you immediately, a welcome contrast to the bitter cold outside. The soft crackle of a fire fills the quiet room, and the smell of roasted meat and ale lingers in the air, though if there were any patrons they appear to have retired for the night.\nThe dim light from the hearth casts long shadows along the wooden floor, giving the space a cozy, if slightly worn, appearance.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "48",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "17": {
+    "storyText": "You dream of standing alone on a vast, frozen lake, an eerie silence surrounding you. In the distance, a faint light flickers, and you begin to walk toward it. The ice beneath your feet groans and shifts. \nA sharp crack pierces the stillness, and you freeze, your limbs heavy with cold.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "18",
+        "storyPrompt": "Lie flat to distribute your weight",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "18",
+        "storyPrompt": "Creep ahead slowly",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "18",
+        "storyPrompt": "Run!",
+        "condition": ""
+      }
+    ]
+  },
+  "18": {
+    "storyText": "You try to move, but your body is numb, unyielding. The ice gives way beneath you, and you plunge into the dark, icy depths. ",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "19",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "19": {
+    "storyText": "The light fades, you never wake.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "21",
+        "storyPrompt": "The End?",
+        "condition": ""
+      }
+    ]
+  },
+  "21": {
+    "storyText": "<GET IMAGE ENDING_FROZEN>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "the_end",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "23": {
+    "storyText": "As the hours pass, the weather worsens steadily, then before you know it a violent blizzard howls around you, the wind biting at your skin, and the swirling snow threatens to swallow you whole. \n\nYou need to find shelter—and fast. This storm is relentless. Could things possibly get worse?",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "6",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "25": {
+    "storyText": "He smiles broadly, the man’s energy is infectious, and despite the strange emptiness of the tavern, you feel a pull toward the warmth he offers. \n\"I'm Tam, nice to make your acquaintance.\" he says, with a slight bow, \"not many come this way, you know. Lucky for you, you found us just before the night turned even worse. I fear anyone out in this won't make it to morning.\", says the young innkeeper. \n\nAlmost as if on queue, you hear the beating of the wind and hail grow stronger. ",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "26",
+        "storyPrompt": "Ask the price for food",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "27",
+        "storyPrompt": "Ask the price for a room",
+        "condition": ""
+      }
+    ]
+  },
+  "26": {
+    "storyText": "\"I'm afraid we're no longer serving food or drink this late, you'd have to wait until morning. Though I assure you it's worth the wait. Our roasted potatoes are a delicacy.\", he says.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "27",
+        "storyPrompt": "Ask the price for a room",
+        "condition": ""
+      }
+    ]
+  },
+  "27": {
+    "storyText": "The innkeeper’s smile widens, his eyes crinkling with good-natured amusement. \"Ah, no need to worry about that,\" he says, waving off your question with a casual flick of his hand. \"We don't charge travelers here. The night’s on the house. After all, out here, it’s more important that folks have a roof over their head than coins in their pocket, don’t you think?\"\n\n\"Of course! It's the least we can do for someone who's been through as much as you.\" He picks up a candle from the bar and lights it, the flame flickering in the low light. \"Let me show you to your room. You must be exhausted after that long journey.\"",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "28",
+        "storyPrompt": "Follow",
+        "condition": ""
+      }
+    ]
+  },
+  "28": {
+    "storyText": "You nod, though unease tightens in your gut. There's something about his cheerful insistence that feels... off. But your body is weary, and the thought of a soft bed is too tempting to resist. Pushing your doubts aside, you follow the innkeeper as he makes his way toward a wooden staircase.\n\nThe stairs creak underfoot as you ascend, the faint light of the candle casting strange, dancing shadows on the walls. Each step seems heavier than the last, your legs dragging as if the very air around you thickens with each passing moment. The innkeeper continues to hum quietly to himself, his movements brisk and easy.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "29",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "29": {
+    "storyText": "He leads you down a narrow, dimly lit hallway. The walls here seem closer than they should be, the flickering candlelight warping their edges. The innkeeper stops at a door at the end of the hall, his hand resting on the old brass handle. He turns to you with that same ever-present smile.\n\n\"Here we are,\" he says, opening the door with a smooth push. The room beyond is simple but welcoming—a modest bed, a small table with a single chair, and a covered window that overlooks the snowy countryside. The firelight from the already lit hearth below casts faint shadows on the floorboards.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "30",
+        "storyPrompt": "Enter your room",
+        "condition": ""
+      }
+    ]
+  },
+  "30": {
+    "storyText": "\"You’ll sleep soundly here,\" the innkeeper says, his voice gentle and reassuring. He steps inside and sets the candle down on the table. \"If you need anything, don’t hesitate to call for me. I’m just downstairs.\" He pauses by the door, his smile widening slightly, almost unnaturally so. \"You’re safe here. No need to worry about a thing.\"\n\nHe gives you a final nod before stepping back into the hallway. As the door closes softly behind him, the latch clicking into place, the room falls silent. You stand there, the faint flicker of the candle casting shadows on the walls. The bed looks inviting, but the air in the room feels thick—heavy with something unseen, like the space is watching you, waiting.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "31",
+        "storyPrompt": "Open the window",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "32",
+        "storyPrompt": "Sit in bed",
+        "condition": ""
+      }
+    ]
+  },
+  "31": {
+    "storyText": "You step toward the window, but when you pull back the curtain, the glass is dark—impossibly dark. There’s no moon, no stars, just an inky void that feels like it’s pressing against the windowpane. Your reflection stares back at you, distorted slightly, and for a brief moment, you swear you see something move in the shadows behind you.\n\nYou spin around, but the room is empty. Just the candle flickering on the table.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "32",
+        "storyPrompt": "Sit in bed",
+        "condition": ""
+      }
+    ]
+  },
+  "32": {
+    "storyText": "With a deep breath, you sit on the edge of the bed, but sleep feels far away now. Something about the innkeeper’s insistence, his too-kind smile, and the strange stillness of the place keeps your nerves on edge.\n\nSafe... you can’t shake the feeling that this place is anything but.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "33",
+        "storyPrompt": "Stay awake",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "36",
+        "storyPrompt": "Go to sleep",
+        "condition": ""
+      }
+    ]
+  },
+  "33": {
+    "storyText": "You sit on the edge of the bed, determined to keep your eyes open, though your body betrays you. Every muscle aches from the long journey, and the warmth of the room seeps into your bones, making it harder to resist the pull of sleep. The flickering candlelight dances across the walls, casting long, wavering shadows that seem to twist and move just out of your vision.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "34",
+        "storyPrompt": "Stay awake",
+        "condition": ""
+      }
+    ]
+  },
+  "34": {
+    "storyText": "Your thoughts drift, becoming muddled, distant. You tell yourself to stay awake, to keep your guard up. Something’s wrong here—you can feel it in your bones, but the exhaustion is too deep, too heavy. The rhythmic creak of the inn settling, the faint warmth from the candle, and the soft comfort of the bed all conspire against you.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "35",
+        "storyPrompt": "Stay awake",
+        "condition": ""
+      }
+    ]
+  },
+  "35": {
+    "storyText": "Before you can fight it any longer, your head dips forward, your eyes closing for what you think is just a second. But the moment stretches, and your grip on consciousness slips away.\n\nYou fall into a deep, dreamless sleep.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "37",
+        "storyPrompt": "sleep...",
+        "condition": ""
+      }
+    ]
+  },
+  "36": {
+    "storyText": "Every muscle aches from the long journey, and the warmth of the room seeps into your bones. \n\nThe bed is softer than anything you’ve felt in weeks, you lay down and allow your grip on consciousness to slip away as you fall into a deep, dreamless sleep.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "37",
+        "storyPrompt": "sleep...",
+        "condition": ""
+      }
+    ]
+  },
+  "37": {
+    "storyText": "You awaken to the smell of food drifting up from below, rich and savory. For a moment, it’s comforting—a sharp contrast to the biting cold and emptiness you’ve endured on the road. But as your eyes open, the low howl of the blizzard outside pulls you back into reality.\n\nThe wind screams against the tavern walls, rattling the shutters with a fierce intensity. You glance toward the window—snow still piles up thickly against the glass, swirling in chaotic gusts. The storm hasn't let up; if anything, it’s gotten worse.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "38",
+        "storyPrompt": "Sit up",
+        "condition": ""
+      }
+    ]
+  },
+  "38": {
+    "storyText": "You sit up, rubbing your eyes. The room is much as you left it, dimly lit by the gray light of morning leaking through the frosted window. The walls feel closer than they should, though that might just be the lingering disquiet from the night before. Still, the smell of hot food calls to you, and the exhaustion that weighed on your limbs seems to have eased after the night’s rest.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "39",
+        "storyPrompt": "Look out the window",
+        "condition": ""
+      },
+      {
+        "linkedNodeId": "41",
+        "storyPrompt": "Go downstairs",
+        "condition": ""
+      }
+    ]
+  },
+  "39": {
+    "storyText": "You decide to spend a moment to assess the situation, you really should be back on the road as soon as possible.. \nTaking a look outside the window you see a well and shed that you didn't notice before. The blizzard is still raging, you wonder how long it will last.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "40",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "40": {
+    "storyText": "<GET IMAGE WINDOW_ROOM>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "41",
+        "storyPrompt": "Go downstairs",
+        "condition": ""
+      }
+    ]
+  },
+  "41": {
+    "storyText": "Rising to your feet, you make your way to the door. The chill seeps through the cracks around the frame, but the warmth and the scent of breakfast pull you forward. You open the door and step out into the hallway, greeted by the muffled sounds of clattering dishes and faint voices from downstairs.\n\nThe tavern is quiet, save for the constant roar of the storm. As you descend the stairs, the smell of roasted meat and fresh bread grows stronger, tempting your empty stomach. The fire in the hearth crackles softly, throwing a dim glow over the room, though it feels more subdued now, as if the warmth is fighting to hold back the cold seeping in from outside.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "42",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "42": {
+    "storyText": "The innkeeper stands behind the bar, humming a low tune as he arranges plates. His face brightens when he sees you. \"Good morning! Hope the storm didn’t keep you up too much,\" he says cheerfully, his tone almost too casual given the furious weather. \"Looks like it’s still going strong out there, but no need to worry. We’ve got food and warmth aplenty. Come, have a bite!\"\n\nHe gestures toward a table by the fire, already set with food—thick slices of bread, a plate of steaming stew, and a warm drink waiting beside it. The scene is so inviting, so normal, that it almost feels wrong.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "43",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "43": {
+    "storyText": "You glance toward the window. Outside, the world is a swirling wall of white. No way to leave in this weather. The innkeeper’s smile widens, just a touch, his voice warm and welcoming as always. \"No need to rush off in a storm like this. Best to wait it out. You’re safe here.\"",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "44",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "44": {
+    "storyText": "Safe. That word again.\n\nThe food smells delicious, but as you sit at the table, something in the back of your mind keeps you on edge.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "45",
+        "storyPrompt": "...",
+        "condition": ""
+      }
+    ]
+  },
+  "45": {
+    "storyText": "The stew before you looks inviting, the bread fresh, the drink warm. Outside, the blizzard rages, sealing you within this strange place.\n\nThe innkeeper hums softly to himself, watching you from the corner of his eye, his smile never fading. For a moment, everything seems normal—but just beneath the surface, something isn't right. You can feel it in the air, thick and heavy.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "46",
+        "storyPrompt": "To be continued...",
+        "condition": ""
+      }
+    ]
+  },
+  "46": {
+    "storyText": "This is the end - for now. Feel free to play again!",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "try_again",
+        "storyPrompt": "Play again",
+        "condition": ""
+      }
+    ]
+  },
+  "47": {
+    "storyText": "Behind the counter, a young man greets you with a broad smile. His face is ruddy, his eyes gleaming with warmth and mirth. \"Ah, a weary traveler! You must be frozen to the bone, I worried you would freeze to death hiding out behind that rock. Come in, come in!\" His voice is rich and inviting, as though he’s been waiting for you all along. \nThis explains the shadow you saw in the window, though you're surprised he could see from such a distance in this weather.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "25",
+        "storyPrompt": "Approach the inkeeper",
+        "condition": ""
+      }
+    ]
+  },
+  "48": {
+    "storyText": "Behind the counter, a young man greets you with a broad smile. His face is ruddy, his eyes gleaming with warmth and mirth. \"Ah, a weary traveler! You must be frozen to the bone, Come in, come in!\" His voice is rich and inviting, as though he’s been waiting for you all along.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "25",
+        "storyPrompt": "Approach the inkeeper",
+        "condition": ""
+      }
+    ]
+  },
+  "the_end": {
+    "storyText": "You have perished.",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "try_again",
+        "storyPrompt": "Try Again",
+        "condition": ""
+      }
+    ]
+  },
+  "try_again": {
+    "storyText": "<SET STRING TEMP_EVENT NONE>",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "0",
+        "storyPrompt": "",
+        "condition": ""
+      }
+    ]
+  },
+  "tavern_main_room": {
+    "storyText": "",
+    "nodeBranches": [
+      {
+        "linkedNodeId": "",
+        "storyPrompt": "Approach the innkeeper",
+        "condition": "<GET STRING INKEEPER_PRESENT> == 'true'"
+      }
+    ]
+  }
+}

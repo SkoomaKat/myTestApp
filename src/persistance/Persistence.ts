@@ -3,16 +3,14 @@ import {CustomFields} from "@/src/persistance/CustomFields";
 import {CUR_NODE} from "@/src/app/storyScreenConstants";
 
 export enum Profile {
-    P1 = "profile_1",
-    P2 = "profile_2",
-    P3 = "profile_3",
-    P4 = "profile_4"
+    P1 = "profile_01",
+    P2 = "profile_02",
+    P3 = "profile_03",
+    P4 = "profile_04"
 }
 
 
 export class Persistence {
-    private static customStrings: Map<string, string> = new Map();
-    private static customNumbers: Map<string, number> = new Map();
     private static _cur_profile: Profile = Profile.P1;
 
     public static async saveGame() {
@@ -24,19 +22,18 @@ export class Persistence {
 
         const save_state = Object.fromEntries(state);
 
-        console.log(`state: ${[JSON.stringify(save_state)]}`)
         const saveData = JSON.stringify(save_state)
 
         console.log(`Saving Profile ${this._cur_profile}: ${saveData}`)
 
-        AsyncStorage.setItem(this._cur_profile, saveData)
-            .then(() => {
-                if(!CustomFields.getString(CUR_NODE)) {
-                    console.log(`Profile ${this._cur_profile} not found, creating.`);
-                    CustomFields.setString(CUR_NODE, "0");
-                }
-                console.log(`Profile ${this._cur_profile} saved successfully.`);
-            });
+        await AsyncStorage.setItem(this._cur_profile, saveData)
+
+        if(!CustomFields.getString(CUR_NODE)) {
+            console.log(`Profile ${this._cur_profile} not found, creating.`);
+            CustomFields.setString(CUR_NODE, "0");
+        } else {
+            console.log(`Profile ${this._cur_profile} saved successfully.`);
+        }
     }
 
     public static async loadGame() {
@@ -44,10 +41,10 @@ export class Persistence {
 
         return AsyncStorage.getItem(this._cur_profile)
             .then((value) => {
-                console.log(`Loaded ${this._cur_profile}: ${value}`);
-
                 if (value != null) {
                     console.log("Loading existing save.");
+
+                    CustomFields.clear();
                     const parsedState = JSON.parse(value) || {};
 
                     // Convert regular objects to Maps
@@ -58,25 +55,22 @@ export class Persistence {
                     const strings = new Map(Object.entries(state.get('customStrings') || {}));
 
                     if (strings.has(CUR_NODE)) {
-                        console.log("Node Defined.");
-                        CustomFields.clear();
-
                         numbers.forEach((value, key) => CustomFields.setNumber(key, value));
                         strings.forEach((value, key) => CustomFields.setString(key, value));
                         return true;
                     } else {
                         console.log("No save profile found, creating new profile.");
 
-                        CustomFields.clear();
                         CustomFields.setString(CUR_NODE, "0");
                         return true;
                     }
                 }
+                console.log(`Profile ${this._cur_profile} is Null - value: ${value}`);
                 return false;
             });
     }
 
-    public static delete_profile() {
+    public static async delete_profile() {
         console.log("Deleting...")
         const profileToDelete = this._cur_profile;
         let state = new Map<string, any>;
@@ -91,10 +85,16 @@ export class Persistence {
 
         console.log(`Deleting Profile ${profileToDelete}: ${saveData}`)
 
-        AsyncStorage.setItem(profileToDelete, saveData)
+        await AsyncStorage.removeItem(profileToDelete)
             .then(() => {
                 console.log(`Profile ${profileToDelete} deleted successfully.`);
+                CustomFields.clear();
+            }).catch(() => {
+                console.log(`Failed to delete profile ${profileToDelete}.`);
             });
+
+        const loaded = await AsyncStorage.getItem(this._cur_profile);
+        console.log(`Reloaded profile: ${loaded}`);
     }
 
     public static setProfile(profile: Profile) {

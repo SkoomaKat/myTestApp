@@ -1,16 +1,18 @@
-import {StoryNode} from "@/src/models/StoryNode";
-import {StoryNodeFactory} from "@/src/factory/StoryNodeFactory";
+import {CommandParseUtil} from "@/src/CommandParseUtil";
 
 export interface StoryBranchProps {
     readonly condition?: string;
     readonly linkedNodeId: string;
     readonly storyPrompt: string;
+    readonly mapX?: number;
+    readonly mapY?: number;
 }
 
 export class StoryBranch {
     private readonly _nodeId: string;
-    private storyNode: StoryNode | undefined;
-
+    private _evaluatedCondition?: boolean;
+    readonly mapX?: number;
+    readonly mapY?: number;
     readonly prompt: string;
     readonly condition?: string;
 
@@ -18,16 +20,22 @@ export class StoryBranch {
         this._nodeId = props.linkedNodeId;
         this.prompt = props.storyPrompt;
         this.condition = props.condition
-    }
-
-    public get node() {
-        if (this.storyNode === undefined) {
-            this.storyNode = StoryNodeFactory.getStoryNodeById(this.nodeId);
-        }
-        return this.storyNode
+        this.mapX = props.mapX;
+        this.mapY = props.mapY;
     }
 
     public get nodeId() {
         return this._nodeId;
+    }
+
+    public get evaluatedCondition() {
+        if (this._evaluatedCondition != undefined) return this._evaluatedCondition;
+
+        this._evaluatedCondition = this.condition? eval(CommandParseUtil.parseCommands(this.condition, true).newText) : true;
+        return this._evaluatedCondition;
+    }
+
+    public get isWaypoint(): boolean {
+        return (this.mapX != undefined && this.mapY != undefined)
     }
 }

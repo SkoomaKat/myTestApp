@@ -38,7 +38,6 @@ export interface Node {
     y: number;
 }
 
-// EditableField component to handle text inputs
 const EditableField = ({value, onEdit, onChangeText, isEditing, onBlur, fieldLabel}: {
     value: string;
     onEdit: () => void;
@@ -303,14 +302,17 @@ export default function NodeEditorScreen() {
                                         {top: (index * branchContainerHeight) + nodeContainerHeight},
                                     ]}
                                 >
-                                    <TouchableOpacity
-                                        onPress={() => setNodes((prevNodes) => deleteBranch(prevNodes, node.id, index))}
-                                        style={editorStyles.deleteButton}
-                                    >
-                                        <Text style={editorStyles.deleteButtonText}>X</Text>
-                                    </TouchableOpacity>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <TouchableOpacity
+                                            onPress={() => setNodes((prevNodes) => deleteBranch(prevNodes, node.id, index))}
+                                            style={editorStyles.deleteButton}
+                                        >
+                                            <Text style={editorStyles.deleteButtonText}>X</Text>
+                                        </TouchableOpacity>
 
-                                    <Text style={editorStyles.branchPrompt}>Branch {index + 1}</Text>
+                                        <Text style={editorStyles.branchPrompt}>    Branch {index + 1}</Text>
+                                    </View>
+
 
                                     <EditableField
                                         value={branch.condition || ""}
@@ -333,6 +335,34 @@ export default function NodeEditorScreen() {
                                         onBlur={() => handleBlur(node.id, 'storyPrompt')}
                                         fieldLabel="Prompt"
                                     />
+
+                                    <View style={{flexDirection: 'row'}}>
+                                        <EditableField
+                                            value={branch.mapX?.toString() || ""}
+                                            onEdit={() => handleDoubleClick(node.id, 'mapX', index)}
+                                            onChangeText={(text) => {
+                                                const newValue = !isNaN(Number(text)) ? Number(text) : undefined;
+                                                setNodes((prevNodes) => updateNodeField(prevNodes, node.id, newValue, 'mapX', index))
+                                            }
+                                            }
+                                            isEditing={editingNode === node.id && fieldBeingEdited?.field === 'mapX' && fieldBeingEdited?.branchIndex === index}
+                                            onBlur={() => handleBlur(node.id, 'mapX')}
+                                            fieldLabel="Map X"
+                                        />
+                                        <Text>        </Text>
+                                        <EditableField
+                                            value={branch.mapY?.toString() || ""}
+                                            onEdit={() => handleDoubleClick(node.id, 'mapY', index)}
+                                            onChangeText={(text) => {
+                                                const newValue = !isNaN(Number(text)) ? Number(text) : undefined;
+                                                setNodes((prevNodes) => updateNodeField(prevNodes, node.id, newValue, 'mapY', index))
+                                            }
+                                            }
+                                            isEditing={editingNode === node.id && fieldBeingEdited?.field === 'mapY' && fieldBeingEdited?.branchIndex === index}
+                                            onBlur={() => handleBlur(node.id, 'mapY')}
+                                            fieldLabel="Map Y"
+                                        />
+                                    </View>
 
                                     <EditableField
                                         value={branch.linkedNodeId}

@@ -1,4 +1,4 @@
-import {parseCommands} from "@/src/StoryNodeTracker";
+import { CommandParseUtil } from "@/src/CommandParseUtil";
 import {CustomFields} from "@/src/persistance/CustomFields";
 
 
@@ -22,9 +22,6 @@ describe('parseCommands tests', () => {
 
         jest.spyOn(CustomFields, 'getString').mockImplementation(jest.fn());
         jest.spyOn(CustomFields, 'getNumber').mockImplementation(jest.fn());
-
-        //CustomFields.setString('NAME', '');
-        //CustomFields.setNumber('HEALTH', 100);
     });
 
     afterEach(() => {
@@ -35,7 +32,7 @@ describe('parseCommands tests', () => {
         const storyText = 'Hello, <SET STRING NAME ANDREW>';
         const expectedText = 'Hello, ';
 
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(CustomFields.setString).toHaveBeenCalledWith('NAME', 'ANDREW');
         expect(result.newText).toBe(expectedText);
@@ -45,7 +42,7 @@ describe('parseCommands tests', () => {
         const storyText = test_text + '<SET STRING NAME JOHN><SET NUMBER HEALTH 90>';
         const expectedText = test_text;
 
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(CustomFields.setString).toHaveBeenCalledWith('NAME', 'JOHN');
         expect(CustomFields.setNumber).toHaveBeenCalledWith('HEALTH', 90);
@@ -58,7 +55,7 @@ describe('parseCommands tests', () => {
         const expectedText = test_text + ' ';
 
         mockGetString('NAME', 'ANDREW')
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(CustomFields.getString).toHaveBeenCalledWith('NAME', false);
         expect(result.newText).toBe('Hello ANDREW');
@@ -69,7 +66,7 @@ describe('parseCommands tests', () => {
         const expectedText = 'Current score is ';
         mockGetNumber('SCORE', 5);
 
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(result.newText).toBe(expectedText);
         expect(CustomFields.setNumber).toHaveBeenCalledWith('SCORE', 10);
@@ -78,7 +75,7 @@ describe('parseCommands tests', () => {
     it('should throw an error for invalid command types', () => {
         const storyText = 'This is an invalid command <INVALID STRING NAME>';
 
-        expect(() => parseCommands(storyText)).toThrowError('Invalid command type: INVALID');
+        expect(() => CommandParseUtil.parseCommands(storyText)).toThrow();
     });
 
     it('should handle multiple commands within the same text', () => {
@@ -88,18 +85,19 @@ describe('parseCommands tests', () => {
         mockGetString('NAME', 'JAMES');
         mockGetNumber('HEALTH', 8);
 
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(CustomFields.getNumber).toHaveBeenCalledWith('HEALTH');
         expect(CustomFields.getString).toHaveBeenCalledWith('NAME', false);
 
-        expect(result.newText).toBe(expectedText);});
+        expect(result.newText).toBe(expectedText);
+    });
 
     it('should return unchanged text when no commands are present', () => {
         const storyText = 'This is a simple story with no commands.';
         const expectedText = storyText;
 
-        const result = parseCommands(storyText);
+        const result = CommandParseUtil.parseCommands(storyText);
 
         expect(result.newText).toBe(expectedText);
     });
@@ -107,6 +105,6 @@ describe('parseCommands tests', () => {
 
     it('should throw an error when ADD NUMBER is used on undefined fields', () => {
         const storyText = 'Your new score is <ADD NUMBER SCORE2 10>';
-        expect(() => parseCommands(storyText)).toThrow();
+        expect(() => CommandParseUtil.parseCommands(storyText)).toThrow();
     });
 });

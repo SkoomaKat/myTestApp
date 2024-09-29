@@ -1,9 +1,11 @@
 import {Platform, StyleSheet} from "react-native";
 
 export const isWeb = Platform.OS == 'web';
-export const CUR_NODE = "CUR_NODE";
-export const CUR_CHAPTER = "CUR_CHAPTER";
-export const STORY_STACK = "STORY_STACK";
+export const CUR_NODE = "ISE_CUR_NODE";
+export const CUR_CHAPTER = "ISE_CUR_CHAPTER";
+export const STORY_STACK = "ISE_STORY_STACK";
+export const CUR_MAP = 'ISE_CUR_MAP';
+export const IS_MAP_NODE = "ISE_IS_MAP_NODE"
 
 
 export const storyScreenStyles = StyleSheet.create({
@@ -11,25 +13,51 @@ export const storyScreenStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'black',
     },
-    navbar: {
-        marginTop: 60,
+    navbarContainer: {
+        pointerEvents: 'box-none',
+        height: '100%',
         width: '100%',
         position:'absolute',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: 'row-reverse',
+        alignContent: 'flex-end',
         backgroundColor: 'transparent',
+    },
+    navbarBackground: {
+        pointerEvents: 'box-none',
+        marginLeft: 'auto',
+        flexDirection: 'row',
+    },
+    navbar: {
+        pointerEvents: 'box-none',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+        backgroundColor: 'transparent',
+        paddingLeft: 25
+    },
+    optionsButton: {
+        padding: 10,
+        backgroundColor: 'transparent',
+        borderRadius: 5,
+        width: 50,
+        height: 50,
+        paddingBottom: 100
     },
     navbarButton: {
         padding: 10,
         backgroundColor: 'transparent',
+        borderColor: 'white',
+        borderWidth: 0.5,
+        borderStyle: 'dotted',
         borderRadius: 5,
-        width: 75,
-        height: 75
+        marginBottom: 30,
+        width: '100%',
+        alignItems: 'center'
     },
     navbarButtonText: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: 'white',
+        fontFamily: 'TangerineBold',
+        fontSize: 30
     },
     storyBox: {
         paddingHorizontal: 20,
@@ -45,6 +73,12 @@ export const storyScreenStyles = StyleSheet.create({
         color: '#3b3b3b',
         shadowOpacity: 0.2,
         fontSize: isWeb ? 18 : 16,
+    },
+    noAvailableNodesText: {
+        color: 'white',
+        fontSize: isWeb ? 24 : 20,
+        fontStyle: 'italic',
+        marginTop: isWeb ? 24 : 20,
     },
     latestStoryText: {
         color: 'black',
@@ -80,8 +114,9 @@ export const storyScreenStyles = StyleSheet.create({
         borderRadius: 30,
         marginVertical: 5,
         minWidth: isWeb ? '80%' : '90%',
+        height: '100%',
         alignItems: 'center',
-        overflow: 'hidden',
+        verticalAlign: 'middle'
     },
     buttonText: {
         color: 'black',
